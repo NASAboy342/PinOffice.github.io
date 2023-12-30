@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My first Vue Page</title>
+</head>
+
+<body>
+    <div id="app">{{message}} <br> {{"Faker you"}}</div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    message: "Hello Mother Faker..."
+                }
+            }
+        })
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

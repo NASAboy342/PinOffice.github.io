@@ -1,0 +1,19 @@
+:root{
+    --main-txt-color: rgb(19, 3, 56);
+    --main-backgraound-color: rgb(237, 248, 248);
+    --sub-txt-color: red;
+    --sub-backgraound-color: rgb(221, 238, 238);
+}
+body{
+    background-color: var(--main-backgraound-color);
+    color: var(--main-txt-color);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.infoBox{
+}
+#app{
+    border: dashed var(--main-txt-color) 1px;
+    width: 500px;
+    padding: 10px;
+    word-wrap: break-word;
+}
