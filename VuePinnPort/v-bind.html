@@ -9,12 +9,18 @@
     <div id="app">
         <div v-bind:class="vueClass">Using vue instend to assinge the img url</div>
         <img v-bind:src="IMGurl">
-    </div>
 
-    <h1>v-bind style</h1>
-    <p>Using v instend to set the font size for the text.</p>
-    <div id="app">
+        <h1>v-bind style</h1>
+        <p>Using v instend to set the font size for the text.</p>
         <div v-bind:style="{ fontSize: Size + 'px' }">Text that was assing size by vue instend</div>
+
+        <div v-bind:style="{'background-color': 'rgb('+red+', '+green+', '+blue+')'}">This div show background color that was set by vue instend</div>
+
+        <div v-bind:style="{'background-color': 'rgb('+ (isImportant ? 100 : red) +', '+green+', '+blue+')'}">This important message box was check and assign background color by vue instend</div>
+        
+        <div v-bind:class="{important: isImportant}">This div also got controll its css class by vue instend on true/false</div>
+
+        <div v-bind:class="{important: isImportant}">This div is to prove that the 'v-bind' can just replace by ':' and it still work as normal</div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -25,7 +31,12 @@
                 return{
                     vueClass: "infoBox",
                     IMGurl: onlineIMG,
-                    Size: 26
+                    Size: 26,
+                    red: 200,
+                    green: 248,
+                    blue: 248,
+                    isImportant: true,
+                    importantCss: "important",
                 }
             }
         })

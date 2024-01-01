@@ -20,3 +20,6 @@ body{
 img{
     width: 100%;
 }
+.important{
+    background-color: var(--sub-txt-color);
+}
