@@ -22,4 +22,12 @@ img{
 }
 .important{
     background-color: var(--sub-txt-color);
+    padding: 5px;
+    word-wrap: break-word;
+}
+
+.normal-div{
+    border: dashed var(--main-txt-color) 1px;
+    padding: 5px;
+    word-wrap: break-word;
 }

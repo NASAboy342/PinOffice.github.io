@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>v-if</title>
+    <link rel="stylesheet" href="GlobalStyle.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Using v-if to set condition if to show in stock or not in stock</h1>
+        <div v-if="itemQuantity > 0" class="important">
+            Item in stock
+        </div>
+        <div v-else class="important">
+            Item not in stock
+        </div>
+
+        <h1>Check if the sring of sentence bellow caontain the work 'fake you'</h1>
+        <p>{{text}}</p>
+        <div v-if="text.includes('Fake you')" class="normal-div">The trxt above contain the work 'fake you'</div>
+        <div v-else class="normal-div">The trxt above does not contain the work 'fake you'</div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        var onlineIMG = "https://th.bing.com/th/id/R.13820971a962ffbeb63a8fef36185b16?rik=vZ3lu%2blbhy6jxw&riu=http%3a%2f%2fwallup.net%2fwp-content%2fuploads%2f2016%2f03%2f10%2f319576-photography-landscape-nature-water-grass-trees-plants-sunrise-lake.jpg&ehk=6WS2p9KknQa9F%2bgAH16n44NReuUyS2rzXah2zy7kiAw%3d&risl=&pid=ImgRaw&r=0";
+        const app = Vue.createApp({
+            data(){
+                return{
+                    text: "Fake you, You mother faker, got over here!",
+                    vueClass: "infoBox",
+                    IMGurl: onlineIMG,
+                    Size: 26,
+                    red: 200,
+                    green: 248,
+                    blue: 248,
+                    isImportant: true,
+                    importantCss: "important",
+                    isInstock: true,
+                    itemQuantity: 6,
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
