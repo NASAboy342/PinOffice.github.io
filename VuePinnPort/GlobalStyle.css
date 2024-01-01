@@ -31,3 +31,10 @@ img{
     padding: 5px;
     word-wrap: break-word;
 }
+
+.special-div{
+    background-color: var(--sub-txt-color);
+    border-radius: 5px;
+    color: var(--main-backgraound-color);
+    padding: 5px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>v-for</title>
+    <link rel="stylesheet" href="GlobalStyle.css">
+</head>
+<body>
+
+    <div id="app">
+        <div v-for="i in items" class="normal-div">{{i}}</div>
+        <li v-for="i in items" class="normal-div">{{i}}</li>
+
+        <h2>array of img</h2>
+        <div class="normal-div">
+            <img v-for="i in imgs" :src="i" alt="{{i}}">
+        </div>
+
+        <h2>array of object</h2>
+        <figure v-for="i in itemsObjects" class="special-div">
+            <img :src="i.img" :alt="i.name">
+            <figcaption>{{i.name}}</figcaption>
+        </figure>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        var onlineIMG = "https://th.bing.com/th/id/R.13820971a962ffbeb63a8fef36185b16?rik=vZ3lu%2blbhy6jxw&riu=http%3a%2f%2fwallup.net%2fwp-content%2fuploads%2f2016%2f03%2f10%2f319576-photography-landscape-nature-water-grass-trees-plants-sunrise-lake.jpg&ehk=6WS2p9KknQa9F%2bgAH16n44NReuUyS2rzXah2zy7kiAw%3d&risl=&pid=ImgRaw&r=0";
+        const app = Vue.createApp({
+            data(){
+                return{
+                    text: "Fake you, You mother faker, got over here!",
+                    vueClass: "infoBox",
+                    IMGurl: onlineIMG,
+                    Size: 26,
+                    red: 200,
+                    green: 248,
+                    blue: 248,
+                    isImportant: true,
+                    importantCss: "important",
+                    isInstock: true,
+                    itemQuantity: 6,
+                    items: [
+                        "monitor",
+                        "mouse",
+                        "keyboard",
+                        "case"
+                    ],
+                    imgs:[
+                        "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=600",
+                        "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=600",
+                        "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=600",
+                        "https://images.pexels.com/photos/15736029/pexels-photo-15736029/free-photo-of-people-are-standing-in-line-at-a-coffee-shop.jpeg?auto=compress&cs=tinysrgb&w=600",
+                    ],
+
+                    itemsObjects:[
+                        {
+                            img: "https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=600",
+                            name: "Sun set"
+                        },
+                        {
+                            img: "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            name: "Park road"
+                        },
+                        {
+                            img: "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            name: "Bloom flower"
+                        },
+                        {
+                            img: "https://images.pexels.com/photos/15736029/pexels-photo-15736029/free-photo-of-people-are-standing-in-line-at-a-coffee-shop.jpeg?auto=compress&cs=tinysrgb&w=600",
+                            name: "Coffe shop"
+                        },
+                    ]
+                        
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>
