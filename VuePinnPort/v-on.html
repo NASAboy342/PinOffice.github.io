@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="GlobalStyle.css">
+    <title>v-on</title>
+</head>
+<body>
+
+    <div id="app">
+        <h3>Click the button to increase</h3>
+        <p>Click count: {{clickCount}}</p>
+        <button v-on:click="clickCount++" class="native-button">O</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        var onlineIMG = "https://th.bing.com/th/id/R.13820971a962ffbeb63a8fef36185b16?rik=vZ3lu%2blbhy6jxw&riu=http%3a%2f%2fwallup.net%2fwp-content%2fuploads%2f2016%2f03%2f10%2f319576-photography-landscape-nature-water-grass-trees-plants-sunrise-lake.jpg&ehk=6WS2p9KknQa9F%2bgAH16n44NReuUyS2rzXah2zy7kiAw%3d&risl=&pid=ImgRaw&r=0";
+        const app = Vue.createApp({
+            data(){
+                return{
+                    text: "Fake you, You mother faker, got over here!",
+                    vueClass: "infoBox",
+                    IMGurl: onlineIMG,
+                    Size: 26,
+                    red: 200,
+                    green: 248,
+                    blue: 248,
+                    isImportant: true,
+                    importantCss: "important",
+                    isInstock: true,
+                    itemQuantity: 6,
+                    clickCount: 0,
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+</body>
+</html>

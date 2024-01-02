@@ -20,6 +20,11 @@
             <img :src="i.img" :alt="i.name">
             <figcaption>{{i.name}}</figcaption>
         </figure>
+
+        <h2>array of items with indexs</h2>
+        <div v-for="(i,indexs) in items" class="special-div">
+            {{indexs + 1}}: {{i}}
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
