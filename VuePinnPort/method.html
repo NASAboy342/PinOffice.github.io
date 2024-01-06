@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Method</title>
     <link rel="stylesheet" href="GlobalStyle.css">
-    <title>v-on</title>
 </head>
 <body>
-
     <div id="app">
-        <h3>Click the button to increase</h3>
-        <p>Click count: {{clickCount}}</p>
-        <button v-on:click="clickCount++" class="native-button">O</button>
+        <h3>Click on console to print HelloWorld</h3>
+        <div class="console" v-on:click="PrintConsole">
+            {{consoleText}}
+        </div>
 
-        <h3>Click on item name to change image</h3>
-        <div class="normal-div">
-            <div class="tween-content">
-                <div class="list-container">
-                    <h4 v-for="item in itemsObjects" @:click="img = item.img" class="native-button">{{item.name}}</h4>
-                </div>
-                <div><img :src="img" :alt="img"></div>
-            </div>
-            
+        <h3>Observe the mouse position as you move the poniter</h3>
+        <div class="console" v-on:mousemove="mousePosition">
+            X Position: {{xPos}} <br>
+            Y Position: {{yPos}}
+            <div class="Acircle" :style="{'left': + xPos +'px', 'top': + yPos +'px'}"></div>
         </div>
     </div>
+
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
         var onlineIMG = "https://th.bing.com/th/id/R.13820971a962ffbeb63a8fef36185b16?rik=vZ3lu%2blbhy6jxw&riu=http%3a%2f%2fwallup.net%2fwp-content%2fuploads%2f2016%2f03%2f10%2f319576-photography-landscape-nature-water-grass-trees-plants-sunrise-lake.jpg&ehk=6WS2p9KknQa9F%2bgAH16n44NReuUyS2rzXah2zy7kiAw%3d&risl=&pid=ImgRaw&r=0";
@@ -57,12 +54,20 @@
                             img: "https://images.pexels.com/photos/15736029/pexels-photo-15736029/free-photo-of-people-are-standing-in-line-at-a-coffee-shop.jpeg?auto=compress&cs=tinysrgb&w=600",
                             name: "Coffe shop"
                         },
-                        {
-                            img: "https://th.bing.com/th?id=ORMS.65aa3cd8a277047afac60b8f0264745b&pid=Wdp&w=300&h=156&qlt=90&c=1&rs=1&dpr=1&p=0",
-                            name: "A dud"
-                        }
                     ],
                     img: "",
+                    consoleText: "_",
+                    xPos: 0,
+                    yPos: 0,
+                }
+            },
+            methods: {
+                PrintConsole(){
+                    this.consoleText = " Hellow world" + this.consoleText;
+                },
+                mousePosition(event){
+                    this.xPos = event.offsetX,
+                    this.yPos = event.offsetY
                 }
             }
         })

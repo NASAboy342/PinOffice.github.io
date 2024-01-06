@@ -15,12 +15,13 @@ body{
 }
 #app{
     border: dashed var(--main-txt-color) 1px;
-    width: 500px;
+    width: 50%;
     padding: 10px;
     word-wrap: break-word;
 }
 img{
     width: 100%;
+    border-radius: 5px;
 }
 .important{
     background-color: var(--sub-txt-color);
@@ -29,6 +30,7 @@ img{
 }
 
 .normal-div{
+    background-color: var(--sub-backgraound-color);
     border: dashed var(--main-txt-color) 1px;
     padding: 5px;
     word-wrap: break-word;
@@ -58,4 +60,33 @@ img{
 .native-button:active{
     background-color: var(--active-button-color);
     box-shadow: 0px 4px 5px rgba(0, 98, 255, 0.534);
+}
+.tween-content{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.list-container{
+    margin-left: 5px;
+}
+.list-container :hover{
+    cursor: pointer;
+    background-color: var(--main-backgraound-color);
+    border-radius: 5px;
+}
+.list-container :active{
+    background-color: var(--active-button-color);
+}
+.console{
+    background-color: black;
+    color: rgb(0, 255, 0);
+    height: 500px;
+    font-family:'Courier New', Courier, monospace;
+}
+.Acircle{
+    position: relative;
+    background-color: rgb(0, 255, 0);
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
 }
