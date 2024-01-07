@@ -6,16 +6,15 @@
 </head>
 <body>
     <div id="app">
-        <h3>Click on console to print HelloWorld</h3>
-        <div class="console" v-on:click="PrintConsole">
-            {{consoleText}}
-        </div>
+        <form class="normal-div">
+            <h3>Add Item</h3>
+            <p>Item name: <input type="text" required placeholder="Item name" v-model="ItemName"></p>
+            <p>Quantity: <input type="number" v-model="Quantity"></p>
+            <button type="submit" class="native-button" v-on:click.prevent="addToShoppingList(ItemName,Quantity)">Add Item</button>
+        </form>
 
-        <h3>Observe the mouse position as you move the poniter</h3>
-        <div class="console" v-on:mousemove="mousePosition">
-            X Position: {{xPos}} <br>
-            Y Position: {{yPos}}
-            <div class="Acircle" :style="{'left': + xPos +'px', 'top': + yPos +'px'}"></div>
+        <div class="normal-div">
+            <p v-for="(item,indexs) in ShoppingList">{{indexs+1}} {{item.Name}} {{item.Number}}</p>
         </div>
     </div>
 
@@ -59,6 +58,14 @@
                     consoleText: "_",
                     xPos: 0,
                     yPos: 0,
+                    ItemName: "",
+                    Quantity: 0,
+                    ShoppingList:[
+                        {
+                            Name: "Apple",
+                            Number: 4
+                        }
+                    ]
                 }
             },
             methods: {
@@ -73,6 +80,15 @@
                     if(event.key == 's'){
                         this.yPos += 1
                     }
+                },
+                addToShoppingList(name,number){
+                    let item = {
+                        Name: name,
+                        Number: number
+                    }
+                    this.ShoppingList.push(item),
+                    this.ItemName = "",
+                    this.Quantity = 0
                 }
             }
         })
