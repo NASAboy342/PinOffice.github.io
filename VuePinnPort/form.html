@@ -14,7 +14,10 @@
         </form>
 
         <div class="normal-div">
-            <p v-for="(item,indexs) in ShoppingList">{{indexs+1}} {{item.Name}} {{item.Number}}</p>
+            <p v-for="(item,indexs) in ShoppingList">{{indexs+1}} {{item.Name}} {{item.Number}} 
+                <button type="submit" class="native-button" v-on:click.prevent="removeItem(indexs)">Remove</button>
+            </p>
+            <button type="submit" class="native-button" v-on:click.prevent="clearShoppingList()">Clear Shopping List</button>
         </div>
     </div>
 
@@ -89,6 +92,12 @@
                     this.ShoppingList.push(item),
                     this.ItemName = "",
                     this.Quantity = 0
+                },
+                clearShoppingList(){
+                    this.ShoppingList = []
+                },
+                removeItem(index){
+                    this.ShoppingList.splice(index,1)
                 }
             }
         })
