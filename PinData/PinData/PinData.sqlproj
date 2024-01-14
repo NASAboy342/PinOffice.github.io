@@ -62,4 +62,14 @@
     <Folder Include="Data\Tables" />
     <Folder Include="Dbo\UserDefinedType" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Dbo\StoredProcedure\GetAllTask.sql" />
+    <Build Include="Data\Tables\Tasks.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Data\Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\TasksInit.sql" />
+  </ItemGroup>
 </Project>
