@@ -1,4 +1,5 @@
 <template>
+    <Button class="task-menu">Add Item</Button>
     <table>
         <thead>
             <tr>
@@ -149,4 +150,26 @@ tbody td {
     width: fit-content;
     padding: 5px 15px;
     border-radius: 5px;
-}</style>
+}
+.task-menu{
+  color: var(--main-text-color);
+  text-align: left;
+  padding-left: 10px;
+  text-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none;
+  transition: padding-left 0.2s, background-color 0.4s, padding-top 0.2s, padding-bottom 0.4s;
+}
+.task-menu:hover{
+  background-color: var(--sup-background-color);
+  color: var(--sup-text-color);
+  padding-left: 20px;
+  padding-bottom: 13px;
+}
+.task-menu:active{
+  background-color: var(--main-background-color);
+  color: var(--sup-text-color);
+  padding-left: 20px;
+}
+</style>

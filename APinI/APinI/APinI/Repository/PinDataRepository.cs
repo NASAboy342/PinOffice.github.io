@@ -37,5 +37,15 @@ namespace APinI.Repository
                 req.Status
             }).ToList();
         }
+
+        internal BaseResponse AddTask(BaseTask req)
+        {
+            return GetData<BaseResponse>("AddTask", new
+            {
+                req.Name,
+                req.Description,
+                req.Status
+            }).FirstOrDefault();
+        }
     }
 }

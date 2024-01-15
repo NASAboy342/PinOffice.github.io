@@ -15,5 +15,10 @@ namespace APinI.Services
         {
             return _pinDataRepository.GetAllTask(req);
         }
+
+        public BaseResponse AddTask(BaseTask req)
+        {
+            return _pinDataRepository.AddTask(req);
+        }
     }
 }

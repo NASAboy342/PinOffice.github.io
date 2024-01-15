@@ -22,5 +22,22 @@ namespace APinI.Controllers
         {
             return _todoService.GetAllTask();
         }
+        [HttpPost]
+        [Route("Add-task")]
+        public BaseResponse AddTask(BaseTask req)
+        {
+            try
+            {
+                return _todoService.AddTask(req);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse()
+                {
+                    ErrorCode = 1,
+                    ErrorMessage = "Fail to add task"
+                };
+            }
+        }
     }
 }
