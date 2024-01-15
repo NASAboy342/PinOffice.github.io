@@ -1,8 +1,8 @@
 <template>
     <Button class="task-menu" v-if="AddingItem == 0" v-on:click="AddingItem = 1">Add Item</Button>
     <Form v-if="AddingItem == 1" class="native-form">
-            <Input class="native-input" type="text" v-model="taskName" placeholder="Task Name" />
-            <Input class="native-input" type="textarea" v-model="taskDescription" placeholder="Task Description" />
+            <input class="native-input" type="text" v-model="taskName" placeholder="Task Name">
+            <input class="native-input" type="textarea" v-model="taskDescription" placeholder="Task Description">
             <Button class="task-menu" type="submit" v-on:click.prevent="addTask(taskName,taskDescription)">Add</Button>
     </Form>
     <table>
@@ -52,11 +52,11 @@ export default {
     },
     methods: {
         async GetData(){
-            const response = await axios.get("http://10.60.3.120:444/Todo/get-get-all-task");
+            const response = await axios.get("https://localhost:44348/Todo/get-get-all-task");
             this.ITaskItems = response.data;
         },
         async addTask(pName: string,pDescription: string) {
-            const response = await axios.post("http://10.60.3.120:444/Todo/Add-task", {
+            const response = await axios.post("https://localhost:44348/Todo/Add-task", {
                 name: pName,
                 description: pDescription,
                 status: this.taskStatus,
