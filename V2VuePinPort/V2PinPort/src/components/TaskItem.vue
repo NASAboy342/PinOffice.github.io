@@ -1,5 +1,10 @@
 <template>
-    <Button class="task-menu">Add Item</Button>
+    <Button class="task-menu" v-if="AddingItem == 0" v-on:click="AddingItem = 1">Add Item</Button>
+    <Form v-if="AddingItem == 1" class="native-form">
+            <Input class="native-input" type="text" v-model="taskName" placeholder="Task Name" />
+            <Input class="native-input" type="textarea" v-model="taskDescription" placeholder="Task Description" />
+            <Button class="task-menu" type="submit" v-on:click.prevent="addTask(taskName,taskDescription)">Add</Button>
+    </Form>
     <table>
         <thead>
             <tr>
@@ -38,13 +43,35 @@ export default {
         return {
             name: 'SKA',
             message: "do it do it!",
-            ITaskItems: null
+            ITaskItems: null,
+            taskName: "",
+            taskDescription: "",
+            taskStatus: "Todo",
+            AddingItem: 0
         }
     },
     methods: {
         async GetData(){
             const response = await axios.get("http://10.60.3.120:444/Todo/get-get-all-task");
             this.ITaskItems = response.data;
+        },
+        async addTask(pName: string,pDescription: string) {
+            const response = await axios.post("http://10.60.3.120:444/Todo/Add-task", {
+                name: pName,
+                description: pDescription,
+                status: this.taskStatus,
+            });
+            if(response.data.errorCode == 0){
+                this.GetData();
+                this.taskName = '';
+                this.taskDescription = '';
+                this.AddingItem = 0;
+            }
+            else{
+                alert(response.data.errorMessage);
+                this.GetData();
+                this.AddingItem = 0;
+            }
         }
     },
     created() {
@@ -171,5 +198,13 @@ tbody td {
   background-color: var(--main-background-color);
   color: var(--sup-text-color);
   padding-left: 20px;
+}
+.native-input{
+    text-align: left;
+    height: 40px;
+    padding-left: 40px;
+    border: none;
+    border-bottom: 2px solid var(--line-color);
+    outline: none;
 }
 </style>
