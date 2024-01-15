@@ -329,3 +329,5 @@ _pkginfo.txt
 *.appx
 *.appxbundle
 *.appxupload
+
+*.dll
