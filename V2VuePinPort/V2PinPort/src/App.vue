@@ -2,26 +2,36 @@
 export default {
   data() {
     return {
-      PageLable: "Todo List"
+      PageLable: "Todo List",
+      ClickedTab: "All Task"
     };
-  }
+  },
+  methods:{
+    changeTabToTodo(tab: string) {
+      this.ClickedTab = tab;
+    }
+  },
+  
 }
 </script>
 
 <template>
   <div class="big-div">
     <div class="menu">
-      <div class="task-menu">All Task</div>
-      <div class="task-menu">Todo</div>
-      <div class="task-menu">In Progress</div>
-      <div class="task-menu">Done</div>
+      <div class="task-menu" v-on:click="changeTabToTodo('All Task')">All Task</div>
+      <div class="task-menu" v-on:click="changeTabToTodo('Todo')">Todo</div>
+      <div class="task-menu" v-on:click="changeTabToTodo('InProgress')">In Progress</div>
+      <div class="task-menu" v-on:click="changeTabToTodo('Done')">Done</div>
     </div>
     <div class="page-body">
       <div >
         <h1 class="page-label">{{ PageLable }}</h1>
       </div>
       <div class="page-def">
-        <task-item></task-item>
+        <task-item v-if="ClickedTab == 'All Task'"></task-item>
+        <todo status="Todo" v-if="ClickedTab == 'Todo'"></todo>
+        <todo status="InProgress" v-if="ClickedTab == 'InProgress'"></todo>
+        <todo status="Done" v-if="ClickedTab == 'Done'"></todo>
       </div>
     </div>
   </div>

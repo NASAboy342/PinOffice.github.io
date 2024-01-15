@@ -12,9 +12,9 @@ namespace APinI.Controllers
 
         [HttpPost]
         [Route("get-all-task")]
-        public List<GetAllTaskResponse> GetAllTask()
+        public List<GetAllTaskResponse> GetAllTask(GetAllTaskReques req)
         {
-            return _todoService.GetAllTask();
+            return _todoService.GetAllTask(req);
         }
         [HttpGet]
         [Route("get-get-all-task")]

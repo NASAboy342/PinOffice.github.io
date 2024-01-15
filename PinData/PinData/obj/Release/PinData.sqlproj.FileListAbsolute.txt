@@ -1,0 +1,6 @@
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Release\PinData.dacpac
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Release\PinData.dll
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Release\PinData.pdb
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Release\PinData.sqlproj.AssemblyReference.cache
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Release\PinData.dll
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Release\PinData.pdb

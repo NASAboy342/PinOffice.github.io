@@ -33,6 +33,12 @@ interface ITaskItems {
     status: string;
 }
 export default {
+    props: {
+    status: {
+      type: String,
+      default: "Todo",
+    }
+  },
     data() {
         return {
             name: 'SKA',
@@ -42,7 +48,10 @@ export default {
     },
     methods: {
         async GetData(){
-            const response = await axios.get("http://10.60.3.120:444/Todo/get-get-all-task");
+            const request = {
+                status: this.status
+            }
+            const response = await axios.post("http://10.60.3.120:444/Todo/get-all-task",request);
             this.ITaskItems = response.data;
         }
     },

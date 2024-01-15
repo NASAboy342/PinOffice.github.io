@@ -11,5 +11,9 @@ namespace APinI.Services
         {
             return _pinDataRepository.GetAllTask();
         }
+        public List<GetAllTaskResponse> GetAllTask(GetAllTaskReques req)
+        {
+            return _pinDataRepository.GetAllTask(req);
+        }
     }
 }

@@ -65,6 +65,7 @@
   <ItemGroup>
     <Build Include="Dbo\StoredProcedure\GetAllTask.sql" />
     <Build Include="Data\Tables\Tasks.sql" />
+    <Build Include="Dbo\StoredProcedure\GetAllTaskByStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\Script.PostDeployment1.sql" />
