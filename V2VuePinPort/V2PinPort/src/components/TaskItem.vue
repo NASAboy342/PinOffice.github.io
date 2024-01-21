@@ -52,11 +52,11 @@ export default {
     },
     methods: {
         async GetData(){
-            const response = await axios.get("https://localhost:44348/Todo/get-get-all-task");
+            const response = await axios.get("https://spinport.ddns.net/Todo/get-get-all-task");
             this.ITaskItems = response.data;
         },
         async addTask(pName: string,pDescription: string) {
-            const response = await axios.post("https://localhost:44348/Todo/Add-task", {
+            const response = await axios.post("https://spinport.ddns.net/Todo/Add-task", {
                 name: pName,
                 description: pDescription,
                 status: this.taskStatus,

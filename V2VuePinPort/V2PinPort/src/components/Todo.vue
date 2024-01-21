@@ -51,7 +51,7 @@ export default {
             const request = {
                 status: this.status
             }
-            const response = await axios.post("https://localhost:44348/Todo/get-all-task",request);
+            const response = await axios.post("https://spinport.ddns.net/Todo/get-all-task",request);
             this.ITaskItems = response.data;
         }
     },

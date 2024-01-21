@@ -35,7 +35,7 @@ namespace APinI.Controllers
                 return new BaseResponse()
                 {
                     ErrorCode = 1,
-                    ErrorMessage = "Fail to add task"
+                    ErrorMessage = $"{ex}"
                 };
             }
         }

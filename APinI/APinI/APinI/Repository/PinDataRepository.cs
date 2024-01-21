@@ -9,7 +9,9 @@ namespace APinI.Repository
     {
         private SqlConnection SqlConnection()
         {
-            return new SqlConnection("Server=KH-NB042;Database=PinData;User Id=sa;Password=123;");
+            var cofig = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnectionString"];
+            var connectionstring = cofig?.ConnectionString ?? "Data Source=NASA-DESKTOP;Initial Catalog=PinData;User Id=sa;Password=123";
+            return new SqlConnection(connectionstring);
         }
         private IDbConnection GetConnection => SqlConnection();
         public IEnumerable<T> GetData<T>(string spName)
@@ -18,7 +20,7 @@ namespace APinI.Repository
             var data = GetConnection.Query<T>(spName, null,null,true,null,CommandType.StoredProcedure);
             GetConnection.Close();
             return data;
-        }
+        } 
         public IEnumerable<T> GetData<T>(string spName,object param)
         {
             GetConnection.Open();
