@@ -1,4 +1,10 @@
 <template>
+    <Button class="task-menu" v-if="AddingItem == 0" v-on:click="AddingItem = 1">Add Item</Button>
+    <Form v-if="AddingItem == 1" class="native-form">
+            <input class="native-input" type="text" v-model="taskName" placeholder="Task Name">
+            <input class="native-input" type="textarea" v-model="taskDescription" placeholder="Task Description">
+            <Button class="task-menu" type="submit" v-on:click.prevent="addTask(taskName,taskDescription)">Add</Button>
+    </Form>
     <table>
         <thead>
             <tr>
@@ -27,32 +33,45 @@
 
 <script lang="ts">
 import axios from 'axios'
-interface ITaskItems {
+interface ITaskItem {
     name: string;
     description: string;
     status: string;
 }
 export default {
-    props: {
-    status: {
-      type: String,
-      default: "Todo",
-    }
-  },
     data() {
         return {
             name: 'SKA',
             message: "do it do it!",
-            ITaskItems: null
+            ITaskItems: Array<ITaskItem>(),
+            taskName: "",
+            taskDescription: "",
+            taskStatus: "Todo",
+            AddingItem: 0
         }
     },
     methods: {
         async GetData(){
-            const request = {
-                status: this.status
-            }
-            const response = await axios.post("https://spinport.ddns.net/Todo/get-all-task",request);
+            const response = await axios.get("https://spinport.ddns.net/Todo/get-get-all-task");
             this.ITaskItems = response.data;
+        },
+        async addTask(pName: string,pDescription: string) {
+            const response = await axios.post("https://spinport.ddns.net/Todo/Add-task", {
+                name: pName,
+                description: pDescription,
+                status: this.taskStatus,
+            });
+            if(response.data.errorCode == 0){
+                this.GetData();
+                this.taskName = '';
+                this.taskDescription = '';
+                this.AddingItem = 0;
+            }
+            else{
+                alert(response.data.errorMessage);
+                this.GetData();
+                this.AddingItem = 0;
+            }
         }
     },
     created() {
@@ -158,4 +177,34 @@ tbody td {
     width: fit-content;
     padding: 5px 15px;
     border-radius: 5px;
-}</style>
+}
+.task-menu{
+  color: var(--main-text-color);
+  text-align: left;
+  padding-left: 10px;
+  text-wrap: wrap;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: none;
+  transition: padding-left 0.2s, background-color 0.4s, padding-top 0.2s, padding-bottom 0.4s;
+}
+.task-menu:hover{
+  background-color: var(--sup-background-color);
+  color: var(--sup-text-color);
+  padding-left: 20px;
+  padding-bottom: 13px;
+}
+.task-menu:active{
+  background-color: var(--main-background-color);
+  color: var(--sup-text-color);
+  padding-left: 20px;
+}
+.native-input{
+    text-align: left;
+    height: 40px;
+    padding-left: 40px;
+    border: none;
+    border-bottom: 2px solid var(--line-color);
+    outline: none;
+}
+</style>
