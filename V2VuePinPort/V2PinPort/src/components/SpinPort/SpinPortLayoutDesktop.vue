@@ -6,7 +6,7 @@
             <div class="secondaryColor"></div>
             <div class="optionalColor"></div>
         </div>
-        <div class="websiteName">SPinPort<span style="color: var(--main-color);">></span></div>
+        <div class="websiteName"><span v-on:click="ShowHome()">SPinPort</span><span style="color: var(--main-color);">></span></div>
         <div class="spinheader">
             <div class="spinnav" v-on:click="ShowHome()" >Home</div>
             <div class="spinnav" v-on:click="ShowResume()">Resume</div>
@@ -81,17 +81,27 @@
         color: var(--text-color);
         height: 25px;
         padding: 5px 10px;
-        transition: color 0.1s ;
+        transition: color 0.1s, font-size 0.5s;
     }
     .spinnav:hover{
         color: var(--main-color);
         cursor: pointer;
+        font-size: 30px;
     }
     .websiteName{
         font-family: var(--main-font);
         font-size: 30px;
         font-weight: bold;
         color: var(--text-color);
+    }
+    .websiteName span {
+        margin-right: 0px;
+        transition: margin-right 0.7s, font-size 0.7s;
+    }
+    .websiteName span:hover{
+        cursor: pointer;
+        margin-right: 15px;
+        font-size: 40px;
     }
     .outerHeader{
         position: absolute;
