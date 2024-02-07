@@ -22,7 +22,7 @@
     </div>
 </template>
 
-<style lang="css">
+<style lang="css" scoped>
     img{
         width: 100%;
         border-radius: 10px;

@@ -8,10 +8,10 @@
         </div>
         <div class="websiteName"><span v-on:click="ShowHome()">SPinPort</span><span style="color: var(--main-color);">></span></div>
         <div class="spinheader">
-            <div class="spinnav" v-on:click="ShowHome()" >Home</div>
-            <div class="spinnav" v-on:click="ShowResume()">Resume</div>
-            <div class="spinnav" v-on:click="ShowProject">Projects</div>
-            <div class="spinnav" v-on:click="ShowContact">Contact</div>
+            <div class="spinnav" v-on:click="ShowHome()" >🏠 Home</div>
+            <div class="spinnav" v-on:click="ShowResume()">🪪 Resume</div>
+            <div class="spinnav" v-on:click="ShowProject">📃Projects</div>
+            <div class="spinnav" v-on:click="ShowContact">📩 Contact</div>
         </div>
     </div>
     <div class="home">
