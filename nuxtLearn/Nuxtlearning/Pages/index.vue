@@ -1,10 +1,19 @@
 <template>
-    <div>
-        <ul>
-            <li v-for="post in posts" >
-                <NuxtLink :to="`/${post.title}`" class="button">{{ post.title }}</NuxtLink>
-            </li>
-        </ul>
+    <div class="content">
+        <el-table :data="produactDatas.products" style="width: 100% " header-row-style="color: black;">
+          <el-table-column prop="id" label="Number" width="80"/>
+          <el-table-column prop="title" label="Name" width="180" />
+          <el-table-column prop="description" label="Description" />
+          <el-table-column prop="price" label="Price" width="80"/>
+          <el-table-column prop="images" label="Img">
+            <template #default="scope">
+                <el-image :src="scope.row.images[0]" style="height: 80px; " />
+            </template>
+          </el-table-column>
+          <el-table-column label="Obtion" class="go">
+            <el-button>Go</el-button>
+          </el-table-column>
+        </el-table>
     </div>
 </template>
 
@@ -15,9 +24,10 @@
     const route = useRoute();
     const fullroute = useRequestURL().href;
     const { posts } = usePostPages();
+    const { produactDatas } = await useApiCalling();
 </script>
 
-<style>
+<style scope>
 .button {
     list-style: none;
     display: inline-block;

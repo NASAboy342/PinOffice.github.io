@@ -1,5 +1,5 @@
 <template>
     <div>
-        Some things
+        <Page-under-maintenance></Page-under-maintenance>
     </div>
 </template>

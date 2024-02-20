@@ -11,11 +11,13 @@
   },
   "devDependencies": {
     "@element-plus/nuxt": "^1.0.7",
+    "@nuxtjs/tailwindcss": "^6.11.4",
     "nuxt": "^3.9.3",
     "vue": "^3.4.14",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@vue/composition-api": "^1.7.2"
+    "@vue/composition-api": "^1.7.2",
+    "element-plus": "^2.5.6"
   }
 }

@@ -1,10 +1,13 @@
 <template>
     <div class="contentContainer">
+        <div class="profilePicHolder">
+            <img :src="profilePicture" alt="Profile Picture" class="profilePic">
+        </div>
         <div class="introText">
             <div class="normalText">Hello, I am</div>
             <div class="bigName"><span style="color: var(--main-color);">Pin</span> <span v-for="char in myName">{{char}}</span></div>
             <div class="normalText">Web developer</div>
-            <div class="introText">
+            <div class="introTextBody" >
             Based in Phnom Penh, Cambodia. I create beautiful and functional
             websites for small businesses and individuals. I have over three 
             years of experience in web development, using technologies such 
@@ -14,9 +17,7 @@
             new skills and take on new challenges.
             </div>
         </div>
-        <div>
-            <div ><img :src="profilePicture" alt="Profile Picture" class="profilePic"></div>
-        </div>
+        
         
     </div>
 </template>
@@ -27,16 +28,18 @@
         border-radius: 10px;
     }
     .contentContainer{
-        width: 80%;
-        gap: 10px;
+        width: 100%;
+        gap: 2px;
         margin: auto;
         display: flex;
-        margin-top: 80px;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
         justify-content: space-between;
         color: var(--secondary-color);
     }
     .bigName{
-        font-size: 90px;
+        font-size: 50px;
         font-weight: bold;
         transition: font-size 0.5s;
     }
@@ -44,7 +47,7 @@
         transition: font-size 1s;
     }
     .bigName span:hover{
-        font-size: 120px;
+        font-size: 70px;
     }
     .normalText{
         font-size: 20px;
@@ -57,17 +60,29 @@
     .introText{
         font-size: 20px;
         text-wrap: wrap;
-        width: 70%;
+        width: 96%;
         margin-top: 10px;
+        text-align: center;
     }
     .profilePic{
-        width: 50%;
-        box-shadow: 30px 30px var(--optional-color);
-        transition: width 0.5s, box-shadow 0.5s;
+        height: 100%;
+        width: auto;
+        box-shadow: 15px 15px var(--optional-color);
+        transition: height 0.5s, box-shadow 0.5s;
     }
     .profilePic:hover{
-        width: 60%;
-        box-shadow: 50px 100px var(--optional-color);
+        height: 130%;
+        box-shadow: 20px 25px var(--optional-color);
+    }
+    .profilePicHolder{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 250px;
+    }
+    .introTextBody{
+        padding: 0px 20px;
     }
 </style>
 
