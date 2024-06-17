@@ -3,3 +3,5 @@ APinI/APinI/APinI/bin/Debug/net7.0/APinI.dll
 *.vsidx
 *.dll
 APinI/APinI/APinI/obj/Release/net7.0/refint/APinI.dll
+APinI/APinI/APinI/obj/Debug/net7.0/APinI.AssemblyInfo.cs
+APinI/APinI/APinI/obj/Debug/net7.0/APinI.AssemblyInfoInputs.cache
