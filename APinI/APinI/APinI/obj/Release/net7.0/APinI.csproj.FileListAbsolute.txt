@@ -485,3 +485,5 @@ D:\Clones\PinOffice.github.io\APinI\APinI\APinI\bin\Release\net7.0\runtimes\win\
 D:\Clones\PinOffice.github.io\APinI\APinI\APinI\bin\Release\net7.0\runtimes\win\lib\net7.0\System.Threading.AccessControl.dll
 D:\Clones\PinOffice.github.io\APinI\APinI\APinI\bin\Release\net7.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 D:\Clones\PinOffice.github.io\APinI\APinI\APinI\obj\Release\net7.0\APinI.csproj.Up2Date
+D:\Clones\PinOffice.github.io\APinI\APinI\APinI\obj\Release\net7.0\APinI.RazorAssemblyInfo.cache
+D:\Clones\PinOffice.github.io\APinI\APinI\APinI\obj\Release\net7.0\APinI.RazorAssemblyInfo.cs

@@ -67,6 +67,9 @@
     <Build Include="Data\Tables\Tasks.sql" />
     <Build Include="Dbo\StoredProcedure\GetAllTaskByStatus.sql" />
     <Build Include="Dbo\StoredProcedure\AddTask.sql" />
+    <Build Include="Data\Tables\IpAddress.sql" />
+    <Build Include="Dbo\StoredProcedure\GetPreviousIp.sql" />
+    <Build Include="Dbo\StoredProcedure\SetCurrentIp.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\Script.PostDeployment1.sql" />

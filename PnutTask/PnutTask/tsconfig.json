@@ -1,0 +1,16 @@
+{
+  "references": [],
+  "compilerOptions": {
+    "module": "NodeNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/views/**/*.vue"
+  ],
+  "apiBaseUrl": "https://pnut.local.com:456/"
+}

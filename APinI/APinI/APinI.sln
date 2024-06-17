@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APinI", "APinI\APinI.csproj", "{9A526315-30E6-48E7-950A-CCE4FDB6E5A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APinI", "APinI\APinI.csproj", "{9A526315-30E6-48E7-950A-CCE4FDB6E5A2}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PinData", "..\..\PinData\PinData\PinData.sqlproj", "{DBCC3331-D89B-4EE2-BCEE-0AD3ECC1C3BC}"
 EndProject

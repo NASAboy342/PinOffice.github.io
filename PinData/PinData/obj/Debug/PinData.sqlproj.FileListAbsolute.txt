@@ -4,3 +4,13 @@ D:\Clones\NASAboy342.github.io\PinData\PinData\bin\Debug\PinData.pdb
 D:\Clones\NASAboy342.github.io\PinData\PinData\obj\Debug\PinData.sqlproj.AssemblyReference.cache
 D:\Clones\NASAboy342.github.io\PinData\PinData\obj\Debug\PinData.dll
 D:\Clones\NASAboy342.github.io\PinData\PinData\obj\Debug\PinData.pdb
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Debug\PinData.dacpac
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Debug\PinData.dll
+D:\Clones\PinOffice.github.io\PinData\PinData\bin\Debug\PinData.pdb
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\PinData.sqlproj.AssemblyReference.cache
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\Model.xml
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\refactor.xml
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\postdeploy.sql
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\predeploy.sql
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\PinData.dll
+D:\Clones\PinOffice.github.io\PinData\PinData\obj\Debug\PinData.pdb

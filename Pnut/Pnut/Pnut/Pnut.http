@@ -1,0 +1,6 @@
+@Pnut_HostAddress = http://localhost:5048
+
+GET {{Pnut_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,3 +1,4 @@
+using APinI.Schedular;
 using APinI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ICicdService, CicdService>();
@@ -23,6 +25,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+new DeviceSecheduler().Run();
+
 // Configure the HTTP request pipeline.
 
     app.UseSwagger();
@@ -33,5 +37,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
+app.MapRazorPages();
 
 app.Run();

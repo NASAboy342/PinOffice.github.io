@@ -10,7 +10,7 @@ namespace APinI.Repository
         private SqlConnection SqlConnection()
         {
             var cofig = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnectionString"];
-            var connectionstring = cofig?.ConnectionString ?? "Data Source=NASA-DESKTOP;Initial Catalog=PinData;User Id=sa;Password=123";
+            var connectionstring = cofig?.ConnectionString ?? "Data Source=.;Initial Catalog=PinData;User Id=sa;Password=1234qwer";
             return new SqlConnection(connectionstring);
         }
         private IDbConnection GetConnection => SqlConnection();
@@ -47,6 +47,19 @@ namespace APinI.Repository
                 req.Name,
                 req.Description,
                 req.Status
+            }).FirstOrDefault();
+        }
+
+        internal WebsiteIpAddress GetLastIpAddress()
+        {
+            return GetData<WebsiteIpAddress>("[dbo].[GetPreviousIp]").FirstOrDefault();
+        }
+
+        internal void SetCurrentIpAddress(string newIpAddress)
+        {
+            GetData<BaseResponse>("[dbo].[SetCurrentIp]",new
+            {
+                newIpAddress
             }).FirstOrDefault();
         }
     }

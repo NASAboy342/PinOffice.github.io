@@ -1,4 +1,5 @@
 ﻿using APinI.Models;
+using APinI.Schedular.Jobs;
 using APinI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,20 @@ namespace APinI.Controllers
         {
             WifiCrackingService wifiCrackingService = new WifiCrackingService();
             return await wifiCrackingService.ProccessHacking(req);
+        }
+
+        [HttpGet("update-website-ip")]
+        public string UpdateWebsiteIp()
+        {
+            try
+            {
+                var updateLocalWebsiteIpAddress = new UpdateLocalWebsiteIpAddress();
+                updateLocalWebsiteIpAddress.Execute("Go");
+                return "Success";
+            }catch( Exception ex )
+            {
+                return ex.ToString();
+            }
         }
     }
 }
