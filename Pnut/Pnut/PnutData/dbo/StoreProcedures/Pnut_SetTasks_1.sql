@@ -28,9 +28,9 @@ BEGIN
         @title,
         @description,
         @status,
-        @hiestPriority,
-        @createdOn,
-        @modifyOn,
+        @hiestPriority + 1,
+        GETDATE(),
+        GETDATE(),
         @dueOn
      )
 

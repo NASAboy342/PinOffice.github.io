@@ -6,6 +6,7 @@
         InProgress,
         Pending,
         Done,
-        Delete
+        Delete,
+        Failed
     }
 }

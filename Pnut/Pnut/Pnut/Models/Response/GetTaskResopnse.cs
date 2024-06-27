@@ -15,6 +15,7 @@ namespace Pnut.Models.Response
         public string? Description { get; set; }
         public EnumTaskStatus EnumTaskStatus { get; set; }
         public string? Status => EnumTaskStatus.ToString();
+        public int Priority { get; set; }
         public DateTime DueOn { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime ModifyOn { get; set; }

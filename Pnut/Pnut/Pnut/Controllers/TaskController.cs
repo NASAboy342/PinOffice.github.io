@@ -57,5 +57,22 @@ namespace Pnut.Controllers
                 };
             }
         }
+
+        [HttpPost("update-tasks-display-order")]
+        public BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req)
+        {
+            try
+            {
+                return _taskService.UpdateTasksDisplayOrder(req);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse()
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.ToString()
+                };
+            }
+        }
     }
 }

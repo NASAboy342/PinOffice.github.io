@@ -9,5 +9,6 @@ namespace Pnut.Repositories.Interfacess
         public GetTaskResopnse GetTask(GetTaskRequest req);
         BaseResponse SetTasks(SetTasksRequest req);
         BaseResponse UpdateTasks(UpdateTasksRequest req);
+        BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req);
     }
 }

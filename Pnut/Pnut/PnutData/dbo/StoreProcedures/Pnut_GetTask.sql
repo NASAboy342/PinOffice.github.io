@@ -15,6 +15,7 @@ BEGIN
 				[Title], 
 				[Description], 
 				[Status] AS EnumTaskStatus, 
+				[Priority],
 				[DueOn], 
 				[CreatedOn], 
 				[ModifyOn]

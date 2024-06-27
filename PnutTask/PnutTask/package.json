@@ -18,7 +18,8 @@
     "date-fns": "^3.6.0",
     "element-plus": "^2.7.4",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",

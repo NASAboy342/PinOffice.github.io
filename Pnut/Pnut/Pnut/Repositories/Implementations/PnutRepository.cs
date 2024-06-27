@@ -57,5 +57,13 @@ namespace Pnut.Repositories.Implementations
                 req.ModifyOn
             }).FirstOrDefault();
         }
+
+        public BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req)
+        {
+            return GetData<BaseResponse>("[dbo].[Pnut_UpdateTasksDisplayOrder]", new
+            {
+                tasksDisplayOrder = AsDataTable(req.TaskDisplayOrders)
+            }).FirstOrDefault();
+        }
     }
 }

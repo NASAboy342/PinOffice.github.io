@@ -29,5 +29,10 @@ namespace Pnut.Services.Implementations
         {
             return _pnutRepository.UpdateTasks(req);
         }
+
+        public BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req)
+        {
+            return _pnutRepository.UpdateTasksDisplayOrder(req);
+        }
     }
 }

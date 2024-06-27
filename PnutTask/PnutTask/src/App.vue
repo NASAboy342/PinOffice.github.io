@@ -28,6 +28,9 @@ const handleSelect = () => {
     <el-menu-item index="6">
       <RouterLink to="/about">About</RouterLink>
     </el-menu-item>
+    <!-- <el-menu-item index="7">
+      <RouterLink to="/testPage">Test-Page</RouterLink>
+    </el-menu-item> -->
   </el-menu>
   <RouterView />
   <el-footer class="footer">
@@ -46,6 +49,8 @@ const handleSelect = () => {
   --el-color-primary: var(--Main-color);
   --el-menu-border-color: var(--Main-color);
   --el-menu-hover-bg-color: rgba(255, 166, 0, 0.132);
+  --el-button-border-color: var(--Main-color);
+  --el-button-hover-bg-color: rgb(255, 203, 105);
 }
 
 img {

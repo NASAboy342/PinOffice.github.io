@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace Pnut.Repositories
 {
@@ -24,5 +25,29 @@ namespace Pnut.Repositories
                 return connection.Query<T>(storedProcedureName,request,null,true,null,CommandType.StoredProcedure);
             }
         }
+        public DataTable AsDataTable<T>(IEnumerable<T> items)
+        {
+            DataTable table = new DataTable();
+
+            PropertyInfo[] properties = typeof(T).GetProperties();
+
+            foreach (PropertyInfo prop in properties)
+            {
+                table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+
+            foreach (T item in items)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyInfo prop in properties)
+                {
+                    row[prop.Name] = prop.GetValue(item);
+                }
+                table.Rows.Add(row);
+            }
+
+            return table;
+        }
+
     }
 }
