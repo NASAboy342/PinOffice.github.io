@@ -33,11 +33,16 @@
             <el-option label="Pending" :value="GetTaskRequest.EnumTaskStatus.Pending" @click="UpdateTaskStatus(scope.$index, GetTaskRequest.EnumTaskStatus.Pending)"/>
             <el-option label="Done" :value="GetTaskRequest.EnumTaskStatus.Done" @click="UpdateTaskStatus(scope.$index, GetTaskRequest.EnumTaskStatus.Done)"/>
             <el-option label="Delete" :value="GetTaskRequest.EnumTaskStatus.Delete" @click="UpdateTaskStatus(scope.$index, GetTaskRequest.EnumTaskStatus.Delete)"/>
+            <el-option label="Failed" :value="GetTaskRequest.EnumTaskStatus.Failed" @click="UpdateTaskStatus(scope.$index, GetTaskRequest.EnumTaskStatus.Failed)"/>
           </el-select>
         </div>
       </template>
     </el-table-column>
-    <el-table-column prop="dueOn" label="DueOn" width="180" :formatter="DateFormter"/>
+    <el-table-column prop="dueOn" label="DueOn" width="180" :formatter="DateFormter">
+      <template #default="scope">
+        <span>{{ NormalDateFormat(scope.row.dueOn) }} <el-icon :class="GetDueDateClass(scope.row.enumDatelineCloseLevel)"><Clock /></el-icon></span>
+      </template>
+    </el-table-column>
     <el-table-column label="Actions" width="180">
       <template #default="{ row, $index }">
         <div>
@@ -130,7 +135,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted, ref } from 'vue';
+import { defineProps, onMounted, onUnmounted, ref } from 'vue';
 import * as GetTaskRequest from '@/Models/Requests/GetTaskRequest';
 import * as GetTaskResopnse from '@/Models/Responses/GetTaskResopnse';
 import * as TaskInfo from '@/Models/Responses/GetTaskResopnse';
@@ -142,6 +147,8 @@ import { BaseResponse } from '@/Models/BaseResponse';
 import { UpdateTasksRequest } from '@/Models/Requests/UpdateTasksRequest';
 import { format } from 'date-fns';
 import { IUpdateTaskDisplayOrderRequest } from '@/Models/Requests/UpdateTaskDisplayerOrder';
+import { EnumDatelineCloseLevel } from '@/Models/Responses/GetTaskResopnse';
+
 interface Prop {
   getTaskRequest: GetTaskRequest.GetTaskRequest
 }
@@ -210,12 +217,17 @@ const GetClassBaseOnStatus = (stats: GetTaskRequest.EnumTaskStatus) => {
   if(stats === GetTaskRequest.EnumTaskStatus.Delete){
     return 'delete-status';
   }
+  if(stats === GetTaskRequest.EnumTaskStatus.Failed){
+    return 'delete-status';
+  }
   return 'todo-status'
 }
 const DateFormter = (row: TableData, column: any, cellValue: Date) => {
-  console.log(cellValue);
   return format(cellValue, 'yyyy-MM-dd: hh:mm:ss');
 };
+const NormalDateFormat = (date: Date) => {
+  return format(date, 'yyyy-MM-dd: hh:mm:ss');
+}
 const draggedPriority = ref(0);
 const draggedIndex = ref(0);
 
@@ -252,6 +264,22 @@ const UpdateTask = async () => {
   GetTasks();
   showUpdateDialog.value = false;
 }
+const GetDueDateClass = (enumDatelineCloseLevel:EnumDatelineCloseLevel) => {
+  if(enumDatelineCloseLevel === EnumDatelineCloseLevel.CloseDateline){
+    return 'close-dateline';
+  }
+  if(enumDatelineCloseLevel === EnumDatelineCloseLevel.HalfTheTime){
+    return 'HalfTheTime-dateline';
+  }
+  return 'normal-dateline';
+}
+const intervalId = ref<number>(0);
+onMounted(() => {
+  intervalId.value = setInterval(GetTasks, 30000);
+})
+onUnmounted(() => {
+    clearInterval(intervalId.value);
+});
 </script>
 
 <style scoped>
@@ -291,7 +319,7 @@ const UpdateTask = async () => {
   border-radius: 5px;
 }
 .delete-status{
-  border: 3px solid red;
+  border: 3px solid rgb(255, 109, 87);
   border-radius: 5px;
 }
 :deep(.el-select__wrapper) {
@@ -311,5 +339,14 @@ const UpdateTask = async () => {
 .el-button:hover{
   background-color: rgba(255, 166, 0, 0.18);
   border-color: var(--Main-color);
+}
+.close-dateline{
+  color: rgb(255, 109, 87);
+}
+.HalfTheTime-dateline{
+  color: var(--Main-color);
+}
+.normal-dateline{
+  color: green;
 }
 </style>

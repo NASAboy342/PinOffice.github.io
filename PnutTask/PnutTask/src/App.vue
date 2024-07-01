@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { RouterLink, RouterView } from 'vue-router'
+import LiveClock from '@/components/LiveClock.vue';
+
 const activeIndex = ref('1')
 const handleSelect = () => {
 
@@ -8,7 +10,7 @@ const handleSelect = () => {
 </script>
 
 <template>
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :ellipsis="false">
     <el-menu-item index="0" class="logo"><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"></el-menu-item>
     <el-menu-item index="1">
       <RouterLink to="/">Home</RouterLink>
@@ -26,11 +28,18 @@ const handleSelect = () => {
       <RouterLink to="/done">Done</RouterLink>
     </el-menu-item>
     <el-menu-item index="6">
+      <RouterLink to="/failed">Failed</RouterLink>
+    </el-menu-item>
+    <el-menu-item index="7">
       <RouterLink to="/about">About</RouterLink>
     </el-menu-item>
-    <!-- <el-menu-item index="7">
+    <el-menu-item index="8">
       <RouterLink to="/testPage">Test-Page</RouterLink>
-    </el-menu-item> -->
+    </el-menu-item>
+    <div class="flex-grow">
+      <LiveClock></LiveClock>
+    </div>
+    
   </el-menu>
   <RouterView />
   <el-footer class="footer">
@@ -85,5 +94,13 @@ a {
   background-color: var(--Main-color);
   height: 300px;
   margin-top: 100px;
+  color: var(--Text-on-sub-color);
+}
+.flex-grow{
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
 }
 </style>
