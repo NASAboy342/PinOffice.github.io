@@ -1,5 +1,5 @@
-import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest.ts';
-import * as BaseResponse from '../Models/BaseResponse.ts';
+import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest.js';
+import * as BaseResponse from '@/Models/BaseResponse.js';
 
 //convert this to ts enum "public enum EnumDatelineCloseLevel{    Normal,    HalfTheTime,    CloseDateline}"
 

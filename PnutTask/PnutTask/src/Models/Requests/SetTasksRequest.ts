@@ -1,4 +1,4 @@
-import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest.ts';
+import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest.js';
 
 export interface SetTasksRequest{
     userId: number,

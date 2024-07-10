@@ -1,4 +1,4 @@
-import { EnumTaskStatus } from './GetTaskRequest';
+import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest.js';
 
 export interface UpdateTasksRequest{
     userId: number,

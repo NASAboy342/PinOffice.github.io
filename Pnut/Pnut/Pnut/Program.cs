@@ -15,6 +15,7 @@ builder.Services.AddSingleton<ITaskService, TaskService>();
 builder.Services.AddSingleton<IPnutRepository, PnutRepository>();
 builder.Services.AddSingleton<IGameProviderRepository, GameProviderRepository>();
 builder.Services.AddSingleton<IFakerService, FakerService>();
+builder.Services.AddSingleton<IUserService, UserService>();
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -31,12 +32,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-//}
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 

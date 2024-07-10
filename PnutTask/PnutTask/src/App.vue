@@ -1,50 +1,63 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { RouterLink, RouterView } from 'vue-router'
+import { onMounted, ref } from 'vue';
+import { RouterLink, RouterView , useRouter, useRoute} from 'vue-router'
 import LiveClock from '@/components/LiveClock.vue';
+import Login from '@/components/Login.vue';
+import { useUserInfo } from '@/composables/useUserInfo';
+
+const router = useRouter();
+const route = useRoute();
+const user = useUserInfo();
 
 const activeIndex = ref('1')
 const handleSelect = () => {
-
+}
+if(!user.IsLogin() && route.path !== '/register'){
+  router.push({ name: 'login'});
 }
 </script>
 
 <template>
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :ellipsis="false">
-    <el-menu-item index="0" class="logo"><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"></el-menu-item>
-    <el-menu-item index="1">
-      <RouterLink to="/">Home</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="2">
-      <RouterLink to="/todo">Todo</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="3">
-      <RouterLink to="/inProgress">InProgress</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <RouterLink to="/pending">Pending</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="5">
-      <RouterLink to="/done">Done</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="6">
-      <RouterLink to="/failed">Failed</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="7">
-      <RouterLink to="/about">About</RouterLink>
-    </el-menu-item>
-    <el-menu-item index="8">
-      <RouterLink to="/testPage">Test-Page</RouterLink>
-    </el-menu-item>
-    <div class="flex-grow">
-      <LiveClock></LiveClock>
-    </div>
-    
-  </el-menu>
-  <RouterView />
-  <el-footer class="footer">
-    <p>&copy; 2024 Pin Sopheaktra</p>
-  </el-footer>
+  <div v-if="!user.IsLogin()">
+    <RouterView />
+  </div>
+  <div v-else>
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :ellipsis="false">
+      <el-menu-item index="0" class="logo"><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"></el-menu-item>
+      <el-menu-item index="1">
+        <RouterLink to="/">Home</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <RouterLink to="/todo">Todo</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <RouterLink to="/inProgress">InProgress</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <RouterLink to="/pending">Pending</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="5">
+        <RouterLink to="/done">Done</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="6">
+        <RouterLink to="/failed">Failed</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="7">
+        <RouterLink to="/about">About</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="8">
+        <RouterLink to="/testPage">Test-Page</RouterLink>
+      </el-menu-item>
+      <div class="flex-grow">
+        <LiveClock></LiveClock>
+      </div>
+      
+    </el-menu>
+    <RouterView />
+    <el-footer class="footer">
+      <p>&copy; 2024 Pin Sopheaktra</p>
+    </el-footer>
+  </div>
 </template>
 
 <style>

@@ -68,5 +68,8 @@
     <Build Include="dbo\StoreProcedures\Pnut_UpdateTasks.sql" />
     <Build Include="dbo\UserDefineTypes\TaskDisplayOrder.sql" />
     <Build Include="dbo\StoreProcedures\UpdateTasksDisplayOrder.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_Login.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_Register.sql" />
   </ItemGroup>
 </Project>

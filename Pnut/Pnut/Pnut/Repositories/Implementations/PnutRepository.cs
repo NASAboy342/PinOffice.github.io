@@ -29,6 +29,24 @@ namespace Pnut.Repositories.Implementations
             };
         }
 
+        public LoginResponse Login(LoginRequest req)
+        {
+            return GetData<LoginResponse>("[dbo].[Pnut_Login]", new
+            {
+                req.UserName,
+                req.Password
+            }).FirstOrDefault() ?? new LoginResponse();
+        }
+
+        public BaseResponse Register(UserRegisterRequest req)
+        {
+            return GetData<LoginResponse>("[dbo].[Pnut_Register]", new
+            {
+                req.UserName,
+                req.Password
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
         public BaseResponse SetTasks(SetTasksRequest req)
         {
             return GetData<BaseResponse>("[dbo].[Pnut_SetTasks]", new
@@ -41,7 +59,7 @@ namespace Pnut.Repositories.Implementations
                 req.CreatedOn,
                 req.DueOn,
                 req.ModifyOn
-            }).FirstOrDefault();
+            }).FirstOrDefault() ?? new BaseResponse();
         }
 
         public BaseResponse UpdateTasks(UpdateTasksRequest req)
@@ -55,7 +73,7 @@ namespace Pnut.Repositories.Implementations
                 req.EnumTaskStatus,
                 req.DueOn,
                 req.ModifyOn
-            }).FirstOrDefault();
+            }).FirstOrDefault() ?? new BaseResponse();
         }
 
         public BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req)
@@ -63,7 +81,7 @@ namespace Pnut.Repositories.Implementations
             return GetData<BaseResponse>("[dbo].[Pnut_UpdateTasksDisplayOrder]", new
             {
                 tasksDisplayOrder = AsDataTable(req.TaskDisplayOrders)
-            }).FirstOrDefault();
+            }).FirstOrDefault() ?? new BaseResponse();
         }
     }
 }
