@@ -29,13 +29,13 @@ namespace Pnut.Repositories.Implementations
             };
         }
 
-        public LoginResponse Login(LoginRequest req)
+        public User Login(LoginRequest req)
         {
-            return GetData<LoginResponse>("[dbo].[Pnut_Login]", new
+            return GetData<User>("[dbo].[Pnut_Login]", new
             {
                 req.UserName,
                 req.Password
-            }).FirstOrDefault() ?? new LoginResponse();
+            }).FirstOrDefault() ?? new User();
         }
 
         public BaseResponse Register(UserRegisterRequest req)

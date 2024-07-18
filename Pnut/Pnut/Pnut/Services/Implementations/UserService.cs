@@ -18,7 +18,10 @@ namespace Pnut.Services.Implementations
         {
             req.Password = EncryptHelper.Encrypt5Shifted(req.Password);
 
-            return _pnutRepository.Login(req);
+            return new LoginResponse
+            {
+                User = _pnutRepository.Login(req)
+            };
         }
 
         public BaseResponse Register(UserRegisterRequest req)

@@ -5,20 +5,33 @@
       <h1>PnutTask Register</h1>
     </el-form-element>
     <el-form-element>
-      <el-input placeholder="Username" />
+      <el-input v-model="registerRequest.userName" placeholder="Username" :required="true"/>
     </el-form-element>
     <el-form-element>
-      <el-input placeholder="Password" />
+      <el-input v-model="registerRequest.password" placeholder="Password" :required="true"/>
     </el-form-element>
     <el-form-element class="login-button">
-      <el-button type="primary" >Register</el-button>
+      <el-button @click="userInfo.Register(registerRequest)" type="primary" >Register</el-button>
+      <el-button @click="GotoLogin" type="normal" >Login</el-button>
     </el-form-element>
   </el-form>
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from "vue-router";
+import { useUserInfo } from "@/composables/useUserInfo"
+import { RegisterRequest } from "@/Models/Requests/RegisterRequest";
+import { ref } from "vue";
 
-
+const userInfo = useUserInfo();
+const router = useRouter();
+const GotoLogin = () => {
+  router.push({ name: 'login'});
+}
+const registerRequest = ref<RegisterRequest>({
+  userName: '',
+  password: ''
+});
 
 </script>
 

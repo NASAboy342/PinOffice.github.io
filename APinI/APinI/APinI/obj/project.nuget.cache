@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0v/kuGgqZotM4b3iRlORHousDXlm3C9NPZ7G8vLlwPSYKcDFQDkw8bqmozZSis+gCYDMmytY371aVaXxAEGikg==",
+  "dgSpecHash": "EtCF9tFMbeM=",
   "success": true,
   "projectFilePath": "D:\\Clones\\PinOffice.github.io\\APinI\\APinI\\APinI\\APinI.csproj",
   "expectedPackageFiles": [
@@ -108,7 +108,7 @@
       "code": "NU1803",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nuget.remotes.local/nuget'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
+      "message": "You are running the 'restore' operation with an 'HTTP' source, 'http://nuget.remotes.local/nuget/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source."
     }
   ]
 }

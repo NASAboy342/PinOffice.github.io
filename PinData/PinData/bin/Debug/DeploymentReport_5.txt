@@ -1,0 +1,22 @@
+﻿** Highlights
+     Tables that will be recreated with data migrated
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[IpAddress] (Table)
+       [dbo].[Tasks] (Table)
+       Default Constraint: unnamed constraint on [dbo].[IpAddress] (Default Constraint)
+       [dbo].[AddTask] (Procedure)
+       [dbo].[GetAllTask] (Procedure)
+       [dbo].[GetAllTaskByStatus] (Procedure)
+       [dbo].[GetPreviousIp] (Procedure)
+       [dbo].[SetCurrentIp] (Procedure)
+
+** Supporting actions

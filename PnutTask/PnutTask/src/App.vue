@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { RouterLink, RouterView , useRouter, useRoute} from 'vue-router'
-import LiveClock from '@/components/LiveClock.vue';
-import Login from '@/components/Login.vue';
-import { useUserInfo } from '@/composables/useUserInfo';
+import { onMounted, ref } from "vue";
+import { RouterLink, RouterView, useRouter, useRoute } from "vue-router";
+import LiveClock from "@/components/LiveClock.vue";
+import Login from "@/components/Login.vue";
+import { useUserInfo } from "@/composables/useUserInfo";
+import { useUserStore } from "./stores/useUserStore";
+import MenuBox from "@/components/MenuBox.vue";
 
 const router = useRouter();
 const route = useRoute();
 const user = useUserInfo();
+const userStore = useUserStore();
 
-const activeIndex = ref('1')
-const handleSelect = () => {
-}
-if(!user.IsLogin() && route.path !== '/register'){
-  router.push({ name: 'login'});
-}
+const activeIndex = ref("1");
+const handleSelect = () => {};
+onMounted(() => {
+  if (!user.IsLogin() && route.path !== "/register") {
+    router.push({ name: "login" });
+  }
+});
 </script>
 
 <template>
@@ -22,8 +26,16 @@ if(!user.IsLogin() && route.path !== '/register'){
     <RouterView />
   </div>
   <div v-else>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" :ellipsis="false">
-      <el-menu-item index="0" class="logo"><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"></el-menu-item>
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+      :ellipsis="false"
+    >
+      <el-menu-item index="0" class="logo"
+        ><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"
+      /></el-menu-item>
       <el-menu-item index="1">
         <RouterLink to="/">Home</RouterLink>
       </el-menu-item>
@@ -50,8 +62,8 @@ if(!user.IsLogin() && route.path !== '/register'){
       </el-menu-item>
       <div class="flex-grow">
         <LiveClock></LiveClock>
+        <MenuBox></MenuBox>
       </div>
-      
     </el-menu>
     <RouterView />
     <el-footer class="footer">
@@ -73,6 +85,7 @@ if(!user.IsLogin() && route.path !== '/register'){
   --el-menu-hover-bg-color: rgba(255, 166, 0, 0.132);
   --el-button-border-color: var(--Main-color);
   --el-button-hover-bg-color: rgb(255, 203, 105);
+  --primary-button-hove-bg: rgb(255, 192, 74);
 }
 
 img {
@@ -82,7 +95,8 @@ img {
 body {
   margin: 0;
   padding: 0;
-  font-family: Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-family: Inter, "Helvetica Neue", Helvetica, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
 h1 {
@@ -92,28 +106,38 @@ h1 {
 a {
   text-decoration: none;
 }
+
+.el-button.el-button--normal:hover {
+  background-color: var(--el-menu-hover-bg-color);
+  border-color: var(--el-menu-border-color);
+}
+.el-button.el-button--primary:hover {
+  background-color: var(--primary-button-hove-bg);
+  border-color: var(--el-menu-border-color);
+}
 </style>
 
 <style scoped>
 .el-menu--horizontal.el-menu {
-  border-top: 2px solid var(--el-color-primary)
+  border-top: 2px solid var(--el-color-primary);
 }
 
 .el-menu-item.logo {
   width: 80px;
 }
-.footer{
+.footer {
   padding-top: 20px;
   background-color: var(--Main-color);
   height: 300px;
   margin-top: 100px;
   color: var(--Text-on-sub-color);
 }
-.flex-grow{
+.flex-grow {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 8px;
+  gap: 10px;
 }
 </style>

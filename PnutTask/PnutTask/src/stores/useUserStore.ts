@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { EnumUserType, User } from "../Models/User";
+import { EnumUserType, User } from "../Models/User.js";
 
-export const useUserStore = defineStore('counter', () => {
+export const useUserStore = defineStore('user', () => {
     const userInfo = ref<User>({
         name: '',
         id: 0,
@@ -14,4 +14,6 @@ export const useUserStore = defineStore('counter', () => {
     return{
         userInfo,
     }
+},{
+    persist: true
 });

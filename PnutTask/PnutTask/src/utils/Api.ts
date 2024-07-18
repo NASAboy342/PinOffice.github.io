@@ -1,7 +1,7 @@
 
 export class Api {
     static async Post<TRequest, TResponse>(url: string, data: TRequest): Promise<TResponse> {
-        const backendBaseUrl = 'https://pnut.local.com:456/';
+        const backendBaseUrl = 'http://pnut.local.com:400/';
         try {
             const response = await fetch(`${backendBaseUrl}${url}`, {
                 method: 'POST',

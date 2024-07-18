@@ -1,3 +1,4 @@
+
 <template>
   <el-form class="register-form">
     <el-form-element class="login-title">
@@ -5,20 +6,34 @@
       <h1>PnutTask Login</h1>
     </el-form-element>
     <el-form-element>
-      <el-input placeholder="Username" />
+      <el-input v-model="loginRequest.userName" placeholder="Username" />
     </el-form-element>
     <el-form-element>
-      <el-input placeholder="Password" />
+      <el-input v-model="loginRequest.password" placeholder="Password" />
     </el-form-element>
     <el-form-element class="login-button">
-      <el-button type="primary" >Login</el-button>
+      <el-button @click="userInfo.Login(loginRequest)" type="primary" >Login</el-button>
+      <el-button @click="GotoRegister" type="normal" >Register</el-button>
     </el-form-element>
   </el-form>
 </template>
 
 <script lang="ts" setup>
+import { useUserInfo } from "@/composables/useUserInfo";
+import { LoginRequest } from "@/Models/Requests/LoginRequest";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+const GotoRegister = () => {
+  router.push({ name: 'register'});
+}
 
+const userInfo = useUserInfo()
+const loginRequest = ref<LoginRequest>({
+  userName: '',
+  password: ''
+})
 </script>
 
 <style scoped>

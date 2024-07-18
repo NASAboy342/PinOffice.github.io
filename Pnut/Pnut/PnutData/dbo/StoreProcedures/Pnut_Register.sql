@@ -11,10 +11,10 @@ BEGIN
         SELECT 4 AS ErrorCode, 'User already exist' AS ErrorMessage
         RETURN
     END
-
+    DECLARE @normalUser INT = 1;
     --insert new user
-    INSERT INTO [dbo].[User] ([Username], [Password])
-    VALUES (@username, @password)
+    INSERT INTO [dbo].[User] ([Username], [Password], [UserType], [ProfilePicturePath])
+    VALUES (@username, @password, @normalUser, '')
 
     SELECT 0 AS ErrorCode, 'Success' AS ErrorMessage
     

@@ -19,5 +19,7 @@ BEGIN
 		RETURN
 	END
 
-	SELECT 0 AS ErrorCode, 'Success' AS ErrorMessage
+	DECLARE @onlineId INT = 1;
+
+	SELECT [UserName] AS [Name], [Id], @onlineId, [UserType] AS [EnumUserType], [ProfilePicturePath] FROM [User]
 END
