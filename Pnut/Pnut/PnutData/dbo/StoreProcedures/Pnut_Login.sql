@@ -21,5 +21,5 @@ BEGIN
 
 	DECLARE @onlineId INT = 1;
 
-	SELECT [UserName] AS [Name], [Id], @onlineId, [UserType] AS [EnumUserType], [ProfilePicturePath] FROM [User]
+	SELECT [UserName] AS [Name], [Id], @onlineId, [UserType] AS [EnumUserType], [ProfilePicturePath] FROM [User] WHERE [UserName] = @username AND [Password] = @password
 END
