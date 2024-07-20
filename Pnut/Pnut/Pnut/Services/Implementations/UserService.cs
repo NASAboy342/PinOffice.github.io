@@ -17,10 +17,12 @@ namespace Pnut.Services.Implementations
         public LoginResponse Login(LoginRequest req)
         {
             req.Password = EncryptHelper.Encrypt5Shifted(req.Password);
-
+            var loginResponse = _pnutRepository.Login(req);
             return new LoginResponse
             {
-                User = _pnutRepository.Login(req)
+                User = loginResponse,
+                ErrorCode = loginResponse.ErrorCode,
+                ErrorMessage = loginResponse.ErrorMessage,
             };
         }
 

@@ -2,7 +2,7 @@
 
 namespace Pnut.Models
 {
-    public class User
+    public class User : BaseResponse
     {
         public string? Name { get; set; }
         public int Id { get; set; }

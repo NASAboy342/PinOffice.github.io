@@ -5,13 +5,13 @@
       <h1>PnutTask Register</h1>
     </el-form-element>
     <el-form-element>
-      <el-input v-model="registerRequest.userName" placeholder="Username" :required="true"/>
+      <el-input v-model="registerRequest.userName" placeholder="Username" :required="true" @input="CheckUserNameFromat()"/>
     </el-form-element>
     <el-form-element>
-      <el-input v-model="registerRequest.password" placeholder="Password" :required="true"/>
+      <el-input v-model="registerRequest.password" placeholder="Password" :required="true" @input="CheckPasswordFromat()" :show-password="true"/>
     </el-form-element>
     <el-form-element class="login-button">
-      <el-button @click="userInfo.Register(registerRequest)" type="primary" >Register</el-button>
+      <el-button @click="ProccedRegister()" type="primary" >Register</el-button>
       <el-button @click="GotoLogin" type="normal" >Login</el-button>
     </el-form-element>
   </el-form>
@@ -22,7 +22,10 @@ import { useRouter } from "vue-router";
 import { useUserInfo } from "@/composables/useUserInfo"
 import { RegisterRequest } from "@/Models/Requests/RegisterRequest";
 import { ref } from "vue";
+import { BaseResponse } from "@/Models/BaseResponse";
+import { useAlertStatusStore } from "@/stores/useAlertStatusStore";
 
+const alertStatus = useAlertStatusStore();
 const userInfo = useUserInfo();
 const router = useRouter();
 const GotoLogin = () => {
@@ -32,7 +35,23 @@ const registerRequest = ref<RegisterRequest>({
   userName: '',
   password: ''
 });
-
+const ProccedRegister = async () => {
+  var registerResponse: BaseResponse = await userInfo.Register(registerRequest.value);
+  if(registerResponse.errorCode !== 0){
+    alertStatus.SetAlert('error', registerResponse.errorMessage);
+  }else{
+    alertStatus.SetAlert('success', registerResponse.errorMessage);
+    GotoLogin();
+  }
+}
+const CheckUserNameFromat = () => {
+  const regExp = /[^\w]/g;
+  registerRequest.value.userName = registerRequest.value.userName.replace(regExp,'');
+}
+const CheckPasswordFromat = () => {
+  const regExp = /[^\w]/g;
+  registerRequest.value.password = registerRequest.value.password.replace(regExp,'');
+}
 </script>
 
 <style scoped>

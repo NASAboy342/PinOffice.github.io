@@ -1,4 +1,4 @@
 export interface BaseResponse {
-    ErrorCode: number,
-    ErrorMessage: string
+    errorCode: number,
+    errorMessage: string
 }

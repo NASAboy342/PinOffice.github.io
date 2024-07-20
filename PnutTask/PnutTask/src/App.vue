@@ -6,6 +6,8 @@ import Login from "@/components/Login.vue";
 import { useUserInfo } from "@/composables/useUserInfo";
 import { useUserStore } from "./stores/useUserStore";
 import MenuBox from "@/components/MenuBox.vue";
+import Alert from "@/components/Alert.vue";
+import Profile from "@/components/Profile.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -19,9 +21,12 @@ onMounted(() => {
     router.push({ name: "login" });
   }
 });
+const isRootAccount = ref(userStore.userInfo.id === 1);
+
 </script>
 
 <template>
+  <Alert/>
   <div v-if="!user.IsLogin()">
     <RouterView />
   </div>
@@ -57,10 +62,11 @@ onMounted(() => {
       <el-menu-item index="7">
         <RouterLink to="/about">About</RouterLink>
       </el-menu-item>
-      <el-menu-item index="8">
+      <el-menu-item index="8" v-if="isRootAccount">
         <RouterLink to="/testPage">Test-Page</RouterLink>
       </el-menu-item>
       <div class="flex-grow">
+        <Profile></Profile>
         <LiveClock></LiveClock>
         <MenuBox></MenuBox>
       </div>
@@ -86,6 +92,9 @@ onMounted(() => {
   --el-button-border-color: var(--Main-color);
   --el-button-hover-bg-color: rgb(255, 203, 105);
   --primary-button-hove-bg: rgb(255, 192, 74);
+  --top-z-index: 1;
+  --second-z-index: 2;
+  --third-z-index: 3;
 }
 
 img {

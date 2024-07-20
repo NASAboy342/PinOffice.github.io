@@ -6,6 +6,7 @@ import { RegisterRequest } from '../Models/Requests/RegisterRequest.js';
 import { BaseResponse } from '../Models/BaseResponse.js';
 import { EnumUserType } from '@/Models/User.js';
 import { useRouter } from 'vue-router';
+import { LoginResponse } from '@/Models/Responses/LoginResponse.js';
 
 export function useUserInfo(){
 
@@ -23,7 +24,7 @@ export function useUserInfo(){
         return true;
     }
 
-    const Login = async (req: LoginRequest) => {
+    const Login = async (req: LoginRequest): Promise<LoginResponse> => {
         if(!IsValidLoginRequest(req)){
             alert('Invalid login info')
             return
@@ -33,6 +34,7 @@ export function useUserInfo(){
         if(IsLogin()){
             router.push({ name: "todo"});
         }
+        return response;
     }
 
     const Logout = () => {
@@ -53,19 +55,19 @@ export function useUserInfo(){
         return true;
     }
 
-    const Register = async (req: RegisterRequest) => {
+    const Register = async (req: RegisterRequest):Promise<BaseResponse> => {
         if(!IsValidRegisterRequest(req)){
             alert('Invalid register info');
             return
         }
         const response: BaseResponse = await ApiCalling.Register(req);
-        if(response.ErrorCode === 0){
+        if(await response.errorCode === 0){
             const loginRequest = ref<LoginRequest>({
                 userName: req.userName,
                 password: req.password,
             })
-            await Login(loginRequest.value);
         }
+        return response;
     }
 
 
