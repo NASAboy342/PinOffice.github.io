@@ -1,15 +1,13 @@
 <template>
-  <el-button @click="alertStatus.SetAlert('error', 'Test Error')"> Get error </el-button>
+  <div class="w-96 place-self-center bg-blue-500 sm:bg-green-500 md:bg-red-500 lg:bg-yellow-500 xl:bg-purple-500">
+  Responsive background color
+</div>
+
 </template>
 
 <script lang="ts" setup>
-import Alert  from '@/components/Alert.vue'
-import { useAlertStatusStore } from '@/stores/useAlertStatusStore';
-import { ref } from 'vue';
-var alertStatus = useAlertStatusStore();
+import { ref } from 'vue'
+
 </script>
-
-
-
-<style scoped>
+<style>
 </style>

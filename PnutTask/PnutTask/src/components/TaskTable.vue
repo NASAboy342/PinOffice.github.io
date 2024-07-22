@@ -4,6 +4,10 @@
     <el-button :icon="Search" circle />
   </div>
   <el-table 
+  v-loading="isTaskLoading"
+  element-loading-text="Loading..."
+  :element-loading-spinner="loadingSvg"
+  element-loading-svg-view-box="-10, -10, 50, 50"
   :data="tasks" 
   style="width: 100%"
   header-cell-class-name="custom-header-row">
@@ -148,18 +152,36 @@ import { UpdateTasksRequest } from '@/Models/Requests/UpdateTasksRequest';
 import { format } from 'date-fns';
 import { IUpdateTaskDisplayOrderRequest } from '@/Models/Requests/UpdateTaskDisplayerOrder';
 import { EnumDatelineCloseLevel } from '@/Models/Responses/GetTaskResopnse';
+import { useAlertStatusStore } from '@/stores/useAlertStatusStore';
 
+const loadingSvg = `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `
 interface Prop {
   getTaskRequest: GetTaskRequest.GetTaskRequest
 }
 
+const alertStatus = useAlertStatusStore();
 const props = defineProps<Prop>();
 const tasks = ref<TaskInfo.TaskInfo[]>([]);
 const dialogFormVisible = ref(false);
+const isTaskLoading = ref(false);
 
 const GetTasks = async () => {
+  isTaskLoading.value = true
   const response:GetTaskResopnse.GetTaskResopnse = await ApiCalling.GetTasks(props.getTaskRequest);
+  if(response.errorCode !== 0){
+    alertStatus.SetAlert('error',response.errorMessage);
+  }
   tasks.value = response.tasks;
+  isTaskLoading.value = false
 }
 onMounted(() => {
   GetTasks();

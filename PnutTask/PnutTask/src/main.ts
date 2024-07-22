@@ -6,6 +6,7 @@ import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import './index.css'
 
 const app = createApp(App)
 const pinia = createPinia()
