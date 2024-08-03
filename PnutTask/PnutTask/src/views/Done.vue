@@ -1,5 +1,5 @@
 <template>
-    <h1 class="pageTitle">Done tasks</h1>
+    <h1 class="pageTitle text-2xl font-bold">Done tasks</h1>
     <TaskTable :getTaskRequest="getTaskRequest" />
 </template>
 
@@ -24,5 +24,6 @@ const getTaskRequest = ref<GetTaskRequest.GetTaskRequest>({
 <style scoped>
 .pageTitle{
     margin-left: 20px;
+    margin-top: 20px;
 }
 </style>

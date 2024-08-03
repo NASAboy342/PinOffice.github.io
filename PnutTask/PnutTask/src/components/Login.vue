@@ -3,7 +3,7 @@
   <el-form class="register-form">
     <el-form-element class="login-title">
       <img class="logo-img" src="\public\BaseLogo.png" alt="\public\BaseLogo.png">
-      <h1>PnutTask Login</h1>
+      <h1 class="text-2xl font-bold">PnutTask Login</h1>
     </el-form-element>
     <el-form-element>
       <el-input v-model="loginRequest.userName" placeholder="Username" @input="CheckUserNameFromat()"/>
@@ -81,6 +81,7 @@ a{
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-bottom: 20px;
 }
 .login-button{
   margin-top: 20px;

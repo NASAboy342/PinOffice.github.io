@@ -1,4 +1,5 @@
-﻿using Pnut.Helpers;
+﻿using Pnut.Enums;
+using Pnut.Helpers;
 using Pnut.Models;
 using Pnut.Models.Requests;
 using Pnut.Models.Response;
@@ -18,6 +19,7 @@ namespace Pnut.Services.Implementations
         {
             req.Password = EncryptHelper.Encrypt5Shifted(req.Password);
             var loginResponse = _pnutRepository.Login(req);
+            loginResponse.SetWorkModeValue();
             return new LoginResponse
             {
                 User = loginResponse,
@@ -31,6 +33,27 @@ namespace Pnut.Services.Implementations
             req.Password = EncryptHelper.Encrypt5Shifted(req.Password);
 
             return _pnutRepository.Register(req);
+        }
+
+        public SwichtUserWorkModeResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req)
+        {
+            var result = _pnutRepository.SwichtUserWorkMode(req);
+            if (result.ErrorCode != ErrorCode.Success)
+            {
+                return new SwichtUserWorkModeResponse
+                {
+                    ErrorCode = result.ErrorCode,
+                    ErrorMessage = result.ErrorMessage,
+                };
+            }
+                
+            return new SwichtUserWorkModeResponse
+            {
+                WorkMode = req.WorkMode,
+                WorkModeAsString = req.WorkMode.ToString(),
+                ErrorCode = result.ErrorCode,
+                ErrorMessage = result.ErrorMessage,
+            };
         }
     }
 }

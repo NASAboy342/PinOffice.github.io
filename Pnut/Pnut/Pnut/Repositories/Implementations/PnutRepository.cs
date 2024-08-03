@@ -62,6 +62,15 @@ namespace Pnut.Repositories.Implementations
             }).FirstOrDefault() ?? new BaseResponse();
         }
 
+        public BaseResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req)
+        {
+            return GetData<BaseResponse>("[dbo].[Pnut_SwichtUserWorkMode]", new
+            {
+                req.UserId,
+                workMode = req.WorkMode.ToString()
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
         public BaseResponse UpdateTasks(UpdateTasksRequest req)
         {
             return GetData<BaseResponse>("[dbo].[Pnut_UpdateTasks]", new

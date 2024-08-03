@@ -7,11 +7,16 @@ import { BaseResponse } from '../Models/BaseResponse.js';
 import { EnumUserType } from '@/Models/User.js';
 import { useRouter } from 'vue-router';
 import { LoginResponse } from '@/Models/Responses/LoginResponse.js';
+import { EnumWorkMode } from '@/Models/Enums/EnumWorkMode.js';
+import { ISwichtUserWorkModeRequest } from '@/Models/Requests/SwichtUserWorkModeRequest.js';
+import { useAlertStatusStore } from '@/stores/useAlertStatusStore.js';
+import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js'
 
 export function useUserInfo(){
 
     const user = useUserStore();
     const router = useRouter();
+    const alertStatus = useAlertStatusStore();
 
     const IsLogin = () => {
         return user.userInfo.id !== 0;
@@ -26,13 +31,13 @@ export function useUserInfo(){
 
     const Login = async (req: LoginRequest): Promise<LoginResponse> => {
         if(!IsValidLoginRequest(req)){
-            alert('Invalid login info')
+            alertStatus.SetAlert('error', 'invalid login info');
             return
         }
         const response = await ApiCalling.Login(req);
         user.userInfo = await response.user;
         if(IsLogin()){
-            router.push({ name: "todo"});
+            router.push({ name: "home"});
         }
         return response;
     }
@@ -44,6 +49,8 @@ export function useUserInfo(){
             onlineId: 0,
             enumUserType: EnumUserType.User,
             profilePicturePath: '',
+            workMode: EnumWorkMode.Individual,
+            workModeAsString: ''
         };
         window.location.reload();
     }
@@ -57,7 +64,7 @@ export function useUserInfo(){
 
     const Register = async (req: RegisterRequest):Promise<BaseResponse> => {
         if(!IsValidRegisterRequest(req)){
-            alert('Invalid register info');
+            alertStatus.SetAlert('error', 'invalid registration info');
             return
         }
         const response: BaseResponse = await ApiCalling.Register(req);
@@ -70,11 +77,28 @@ export function useUserInfo(){
         return response;
     }
 
+    const SwichtUserWorkMode = async (workMode: EnumWorkMode) => {
+        const req = ref<ISwichtUserWorkModeRequest>({
+            userId: user.userInfo.id,
+            workMode: workMode
+        });
+
+        const response: ISwichtUserWorkModeResponse = await ApiCalling.SwichtUserWorkMode(req.value);
+        if(response.errorCode === 0){
+            user.userInfo.workMode = response.workMode;
+            user.userInfo.workModeAsString = response.workModeAsString;
+            alertStatus.SetAlert('success', response.errorMessage)
+        }
+        else{
+            alertStatus.SetAlert('error', response.errorMessage)
+        }
+    }
 
     return {
         IsLogin,
         Login,
         Register,
-        Logout
+        Logout,
+        SwichtUserWorkMode
     }
 }

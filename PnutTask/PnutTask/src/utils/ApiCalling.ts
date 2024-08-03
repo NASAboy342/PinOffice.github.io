@@ -8,8 +8,15 @@ import { IUpdateTaskDisplayOrderRequest } from '@/Models/Requests/UpdateTaskDisp
 import { LoginRequest } from '../Models/Requests/LoginRequest.js';
 import { LoginResponse } from '../Models/Responses/LoginResponse.js'
 import { RegisterRequest } from '../Models/Requests/RegisterRequest.js';
+import { Ref } from 'vue';
+import { ISwichtUserWorkModeRequest } from '@/Models/Requests/SwichtUserWorkModeRequest.js';
+import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js';
 
 export class ApiCalling {
+    static async SwichtUserWorkMode(req: ISwichtUserWorkModeRequest): Promise<ISwichtUserWorkModeResponse> {
+        const response = await Api.Post<ISwichtUserWorkModeRequest, ISwichtUserWorkModeResponse>('User/swicht-user-work-mode', req);
+        return response;
+    }
     static async Register(req: RegisterRequest): Promise<BaseResponse.BaseResponse> {
         const response = await Api.Post<RegisterRequest, BaseResponse.BaseResponse>('User/register', req);
         return response;

@@ -8,6 +8,8 @@ import { useUserStore } from "./stores/useUserStore";
 import MenuBox from "@/components/MenuBox.vue";
 import Alert from "@/components/Alert.vue";
 import Profile from "@/components/Profile.vue";
+import WorkModeSwicher from "@/components/WorkModeSwicher.vue";
+import { EnumWorkMode } from "./Models/Enums/EnumWorkMode";
 
 const router = useRouter();
 const route = useRoute();
@@ -30,7 +32,7 @@ const isRootAccount = ref(userStore.userInfo.id === 1);
   <div v-if="!user.IsLogin()">
     <RouterView />
   </div>
-  <div v-else>
+  <div v-else-if="userStore.userInfo.workMode === EnumWorkMode.Individual">
     <el-menu
       :default-active="activeIndex"
       class="el-menu-demo"
@@ -66,6 +68,36 @@ const isRootAccount = ref(userStore.userInfo.id === 1);
         <RouterLink to="/testPage">Test-Page</RouterLink>
       </el-menu-item>
       <div class="flex-grow">
+        <WorkModeSwicher></WorkModeSwicher>
+        <Profile></Profile>
+        <LiveClock></LiveClock>
+        <MenuBox></MenuBox>
+      </div>
+    </el-menu>
+    <RouterView />
+    <el-footer class="footer">
+      <p>&copy; 2024 Pin Sopheaktra</p>
+    </el-footer>
+  </div>
+  <div v-else-if="userStore.userInfo.workMode === EnumWorkMode.Cooperate">
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+      :ellipsis="false"
+    >
+      <el-menu-item index="0" class="logo"
+        ><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"
+      /></el-menu-item>
+      <el-menu-item index="1">
+        <RouterLink to="/">Home</RouterLink>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <RouterLink to="/about">About</RouterLink>
+      </el-menu-item>
+      <div class="flex-grow">
+        <WorkModeSwicher></WorkModeSwicher>
         <Profile></Profile>
         <LiveClock></LiveClock>
         <MenuBox></MenuBox>

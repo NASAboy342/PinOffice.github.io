@@ -1,13 +1,27 @@
 <template>
-  <div class="w-96 place-self-center bg-blue-500 sm:bg-green-500 md:bg-red-500 lg:bg-yellow-500 xl:bg-purple-500">
-  Responsive background color
-</div>
+  <el-select remote v-model="user.userInfo.workMode" placeholder="please select current status" class="work-mode-select" >
+    <el-option label="Individual" :value="EnumWorkMode.Individual"/>
+    <el-option label="Cooperate" :value="EnumWorkMode.Cooperate"/>
+  </el-select>
 
 </template>
 
 <script lang="ts" setup>
+import { EnumWorkMode } from '@/Models/Enums/EnumWorkMode';
+import { useUserStore } from '@/stores/useUserStore';
 import { ref } from 'vue'
+
+const user = useUserStore();
 
 </script>
 <style>
+.work-mode-select{
+  width: 100px;
+}
+.work-mode-select> .el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger{
+  padding: 0px 5px;
+  height: 20px;
+  min-height: 20px;
+  font-size: small;
+}
 </style>

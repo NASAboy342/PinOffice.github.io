@@ -8,5 +8,6 @@ namespace Pnut.Services.Interfacess
     {
         LoginResponse Login(LoginRequest req);
         BaseResponse Register(UserRegisterRequest req);
+        SwichtUserWorkModeResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req);
     }
 }

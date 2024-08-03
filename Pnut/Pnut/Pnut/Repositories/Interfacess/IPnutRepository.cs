@@ -10,6 +10,7 @@ namespace Pnut.Repositories.Interfacess
         User Login(LoginRequest req);
         BaseResponse Register(UserRegisterRequest req);
         BaseResponse SetTasks(SetTasksRequest req);
+        BaseResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req);
         BaseResponse UpdateTasks(UpdateTasksRequest req);
         BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req);
     }

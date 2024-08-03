@@ -71,5 +71,6 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_Login.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_Register.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_SwichtUserWorkMode.sql" />
   </ItemGroup>
 </Project>

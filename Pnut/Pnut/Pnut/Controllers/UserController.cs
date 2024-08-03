@@ -3,6 +3,7 @@ using Pnut.Enums;
 using Pnut.Models;
 using Pnut.Models.Requests;
 using Pnut.Models.Response;
+using Pnut.Services.Implementations;
 using Pnut.Services.Interfacess;
 
 namespace Pnut.Controllers
@@ -50,5 +51,24 @@ namespace Pnut.Controllers
                 };
             }
         }
+
+        [HttpPost("swicht-user-work-mode")]
+        public SwichtUserWorkModeResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req)
+        {
+            try
+            {
+                return _userService.SwichtUserWorkMode(req);
+            }
+            catch (Exception ex)
+            {
+                return new SwichtUserWorkModeResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
     }
+
+    
 }
