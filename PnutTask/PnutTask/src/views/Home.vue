@@ -1,29 +1,17 @@
 <template>
-    <h1 class="pageTitle text-2xl font-bold">All tasks</h1>
-    <TaskTable :getTaskRequest="getTaskRequest" />
+  <HomeForIndividual
+    v-if="userStore.userInfo.workMode === EnumWorkMode.Individual"
+  ></HomeForIndividual>
+  <HomeForCooperate v-else></HomeForCooperate>
 </template>
 
 <script setup lang="ts">
-import { defineComponent, ref } from 'vue';
-import TaskTable from '@/components/TaskTable.vue';
-import * as GetTaskRequest from '@/Models/Requests/GetTaskRequest';
-import { EnumTaskStatus } from '@/Models/Requests/GetTaskRequest';
-import { useUserStore } from '@/stores/useUserStore';
+import HomeForIndividual from "@/components/HomeForIndividual.vue";
+import HomeForCooperate from "@/components/HomeForCooperate.vue";
+import { EnumWorkMode } from "@/Models/Enums/EnumWorkMode";
+import { useUserStore } from "@/stores/useUserStore";
 
 const userStore = useUserStore();
-const getTaskRequest = ref<GetTaskRequest.GetTaskRequest>({
-    UserId: userStore.userInfo.id,
-    IsGetAllStatus: true,
-    IsGetAllDate: true,
-    Status: EnumTaskStatus.Todo,
-    StartDate: new Date,
-    EndDate: new Date
-});
 </script>
 
-<style scoped>
-.pageTitle{
-    margin-left: 20px;
-    margin-top: 20px;
-}
-</style>
+<style scoped></style>

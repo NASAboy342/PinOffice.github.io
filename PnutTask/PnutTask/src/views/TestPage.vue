@@ -1,27 +1,34 @@
 <template>
-  <el-select remote v-model="user.userInfo.workMode" placeholder="please select current status" class="work-mode-select" >
-    <el-option label="Individual" :value="EnumWorkMode.Individual"/>
-    <el-option label="Cooperate" :value="EnumWorkMode.Cooperate"/>
-  </el-select>
-
+<pre>{{ response }}</pre>
 </template>
 
 <script lang="ts" setup>
-import { EnumWorkMode } from '@/Models/Enums/EnumWorkMode';
-import { useUserStore } from '@/stores/useUserStore';
-import { ref } from 'vue'
 
-const user = useUserStore();
+class Api {
+    static async Post<TRequest, TResponse>(url: string, data: TRequest): Promise<TResponse> {
+        const backendBaseUrl = 'http://info-stg-api.remotes.local/';
+        try {
+            const response = await fetch(`${backendBaseUrl}${url}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
+            if (!response.ok) {
+                throw new Error(`Failed to fetch data from ${url}`);
+            }
+
+            return response.json() as Promise<TResponse>;
+        } catch (error) {
+            throw new Error(`Failed to fetch data: ${error}`);
+        }
+    }
+}
+let response = {};
+response = Api.Post<Object, Object>('GameProvider/get-all-gameprovider',{});
 </script>
 <style>
-.work-mode-select{
-  width: 100px;
-}
-.work-mode-select> .el-select__wrapper.el-tooltip__trigger.el-tooltip__trigger{
-  padding: 0px 5px;
-  height: 20px;
-  min-height: 20px;
-  font-size: small;
-}
+
 </style>

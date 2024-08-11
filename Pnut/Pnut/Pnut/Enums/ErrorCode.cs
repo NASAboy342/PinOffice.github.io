@@ -16,5 +16,11 @@ namespace Pnut.Enums
         UserAlreadyExists = 4,
         [Description("Invalid email address")]
         InvalidEmail = 5,
+        [Description("Unable to create group")]
+        UnableToCreateGroup = 6,
+        [Description("Unable to join group")]
+        UnableToJoinGroup = 7,
+        [Description("Unable to leave group")]
+        UnableToLeaveGroup = 8,
     }
 }
