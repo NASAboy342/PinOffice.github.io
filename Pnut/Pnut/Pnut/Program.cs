@@ -16,6 +16,7 @@ builder.Services.AddSingleton<IPnutRepository, PnutRepository>();
 builder.Services.AddSingleton<IGameProviderRepository, GameProviderRepository>();
 builder.Services.AddSingleton<IFakerService, FakerService>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IGroupService, GroupService>();
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";

@@ -11,6 +11,40 @@ namespace Pnut.Repositories.Implementations
         {
         }
 
+        public BaseResponse AddGroupMember(AddGroupMemberRequest req)
+        {
+            return GetData<BaseResponse>("[Pnut_AddGroupMember]", new
+            {
+                req.GroupId,
+                req.UserId,
+                req.UserPosition,
+                req.InviterUserId
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public BaseResponse CreateGroup(CreateGroupRequest req)
+        {
+            return GetData<BaseResponse>("[dbo].[Pnut_CreateGroup]", new
+            {
+                req.GroupName,
+                req.GroupDescription,
+                req.CreatorUserId
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public GetAllMemberedGroupResponse GetAllMemberedGroup(GetAllMemberedGroupRequest req)
+        {
+            var groups = GetData<MemberedGroup>("[dbo].[Pnut_GetAllGroup]", new
+            {
+                req.UserId
+            }).ToList();
+
+            return new GetAllMemberedGroupResponse
+            {
+                MemberedGroups = groups
+            };
+        }
+
         public GetTaskResopnse GetTask(GetTaskRequest req)
         {
             var tasks = GetData<TaskInfo>("[dbo].[Pnut_GetTask]", new
@@ -45,6 +79,15 @@ namespace Pnut.Repositories.Implementations
                 req.UserName,
                 req.Password
             }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public List<User> SearchUsers(SearchUsersRequest req)
+        {
+            return GetData<User>("[dbo].[Pnut_SearchUsers]", new
+            {
+                req.UserName,
+                req.IsById
+            }).ToList();
         }
 
         public BaseResponse SetTasks(SetTasksRequest req)

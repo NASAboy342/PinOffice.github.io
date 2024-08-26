@@ -3,7 +3,6 @@ using Pnut.Enums;
 using Pnut.Models;
 using Pnut.Models.Requests;
 using Pnut.Models.Response;
-using Pnut.Services.Implementations;
 using Pnut.Services.Interfacess;
 
 namespace Pnut.Controllers
@@ -13,6 +12,7 @@ namespace Pnut.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -68,7 +68,22 @@ namespace Pnut.Controllers
                 };
             }
         }
-    }
 
-    
+        [HttpPost("search-users")]
+        public SearchUsersResponse SearchUsers(SearchUsersRequest req)
+        {
+            try
+            {
+                return _userService.SearchUsers(req);
+            }
+            catch (Exception ex)
+            {
+                return new SearchUsersResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+    }
 }

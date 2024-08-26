@@ -35,6 +35,15 @@ namespace Pnut.Services.Implementations
             return _pnutRepository.Register(req);
         }
 
+        public SearchUsersResponse SearchUsers(SearchUsersRequest req)
+        {
+            var users = _pnutRepository.SearchUsers(req);
+            return new SearchUsersResponse
+            {
+                Users = users
+            };
+        }
+
         public SwichtUserWorkModeResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req)
         {
             var result = _pnutRepository.SwichtUserWorkMode(req);

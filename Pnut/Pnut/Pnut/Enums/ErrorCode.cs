@@ -22,5 +22,22 @@ namespace Pnut.Enums
         UnableToJoinGroup = 7,
         [Description("Unable to leave group")]
         UnableToLeaveGroup = 8,
+        [Description("Inviter does not exist")]
+        InviterDoesNotExist = 9,
+        [Description("User is already a member of the group")]
+        UserIsAlreadyAMember = 10,
+        [Description("User is already an admin of the group")]
+        UserIsAlreadyAnAdmin = 11,
+        [Description("User is not a member of the group")]
+        UserIsNotAdmin = 12,
+        [Description("Inviter does not have permission to add members")]
+        InviterDoesNotHavePermissionToAddMembers = 13,
+        [Description("Unable to update group")]
+        UnableToUpdateGroup = 14,
+        [Description("Unable to delete group")]
+        UnableToDeleteGroup = 15,
+        [Description("Group does not exist")]
+        GroupDoesNotExist = 16,
+        UserNameIsTooLong = 17,
     }
 }
