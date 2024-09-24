@@ -11,8 +11,14 @@ import { RegisterRequest } from '../Models/Requests/RegisterRequest.js';
 import { Ref } from 'vue';
 import { ISwichtUserWorkModeRequest } from '@/Models/Requests/SwichtUserWorkModeRequest.js';
 import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js';
+import { GetAllMemberedGroupsRequest } from '../Models/Requests/GetAllMemberedGroup.js';
+import { AllMemberedGroupResponse } from '@/Models/Responses/AllMemberedGroupResponse.js';
 
 export class ApiCalling {
+    static async GetAllMemberedGroups(req: GetAllMemberedGroupsRequest): Promise<AllMemberedGroupResponse> {
+        const response = await Api.Post<GetAllMemberedGroupsRequest, AllMemberedGroupResponse>('Group/get-all-membered-group', req);
+        return response;
+    }
     static async SwichtUserWorkMode(req: ISwichtUserWorkModeRequest): Promise<ISwichtUserWorkModeResponse> {
         const response = await Api.Post<ISwichtUserWorkModeRequest, ISwichtUserWorkModeResponse>('User/swicht-user-work-mode', req);
         return response;

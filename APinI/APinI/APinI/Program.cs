@@ -1,4 +1,6 @@
+using APinI.BE;
 using APinI.Schedular;
+using APinI.Schedular.Jobs;
 using APinI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ICicdService, CicdService>();
+builder.Services.AddSingleton<UpdateLocalWebsiteIpAddress>();
+builder.Services.AddHostedService<UpdateLocalWebsiteIpAddress>();
+builder.Services.AddSingleton<IHttpClientService, HttpClientService>();
+builder.Services.AddSingleton<SchedulerHealthCheck>();
+builder.Services.AddHostedService<SchedulerHealthCheck>();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {

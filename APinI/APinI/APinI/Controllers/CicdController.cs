@@ -34,12 +34,18 @@ namespace APinI.Controllers
             try
             {
                 var updateLocalWebsiteIpAddress = new UpdateLocalWebsiteIpAddress();
-                updateLocalWebsiteIpAddress.Execute("Go");
+                updateLocalWebsiteIpAddress.ToDo("Go");
                 return "Success";
             }catch( Exception ex )
             {
                 return ex.ToString();
             }
+        }
+
+        [HttpPost("trigger-api-usage")]
+        public string TriggerApiUsage()
+        {
+            return "success";
         }
     }
 }

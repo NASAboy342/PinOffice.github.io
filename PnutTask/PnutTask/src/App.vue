@@ -124,6 +124,7 @@ const isRootAccount = ref(userStore.userInfo.id === 1);
   --el-button-border-color: var(--Main-color);
   --el-button-hover-bg-color: rgb(255, 203, 105);
   --primary-button-hove-bg: rgb(255, 192, 74);
+  --nav-bar-background: rgba(255, 166, 0, 0.132);
   --top-z-index: 1;
   --second-z-index: 2;
   --third-z-index: 3;

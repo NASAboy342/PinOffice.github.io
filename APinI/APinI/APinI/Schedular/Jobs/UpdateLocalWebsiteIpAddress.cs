@@ -7,7 +7,7 @@ using System.Text;
 
 namespace APinI.Schedular.Jobs
 {
-    public class UpdateLocalWebsiteIpAddress : JobBase
+    public class UpdateLocalWebsiteIpAddress : SchedularHostingService
     {
         private readonly PinDataRepository _pinDataRepository;
         
@@ -15,9 +15,9 @@ namespace APinI.Schedular.Jobs
         {
             _pinDataRepository = new PinDataRepository();
         }
-        public override TimeSpan Interval { get; set; } = TimeSpan.FromMinutes(5);
+        protected override TimeSpan _Interval { get; set; } = TimeSpan.FromMinutes(5);
 
-        public override void Execute(object o)
+        public override void ToDo(object state)
         {
             try
             {

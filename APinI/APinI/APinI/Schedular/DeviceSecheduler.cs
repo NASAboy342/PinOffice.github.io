@@ -11,7 +11,6 @@ namespace APinI.Schedular
     {
         public void Run()
         {
-            new UpdateLocalWebsiteIpAddress().Run();
             new LogMoving().Run();
         }
     }
