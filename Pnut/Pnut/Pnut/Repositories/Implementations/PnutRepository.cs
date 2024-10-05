@@ -45,6 +45,19 @@ namespace Pnut.Repositories.Implementations
             };
         }
 
+        public GetGroupMembersResponse GetGroupMembers(GetGroupMembersRequest req)
+        {
+            var members = GetData<GroupMember>("[dbo].[Pnut_GetGroupMembers]", new
+            {
+                req.GroupId
+            }).ToList();
+
+            return new GetGroupMembersResponse
+            {
+                GroupMembers = members
+            };
+        }
+
         public GetTaskResopnse GetTask(GetTaskRequest req)
         {
             var tasks = GetData<TaskInfo>("[dbo].[Pnut_GetTask]", new
@@ -86,7 +99,7 @@ namespace Pnut.Repositories.Implementations
             return GetData<User>("[dbo].[Pnut_SearchUsers]", new
             {
                 req.UserName,
-                req.IsById
+                req.Id
             }).ToList();
         }
 

@@ -9,5 +9,6 @@ namespace Pnut.Services.Interfacess
         BaseResponse AddGroupMember(AddGroupMemberRequest req);
         BaseResponse CreateGroup(CreateGroupRequest req);
         GetAllMemberedGroupResponse GetAllMemberedGroup(GetAllMemberedGroupRequest req);
+        GetGroupMembersResponse GetGroupMembers(GetGroupMembersRequest req);
     }
 }

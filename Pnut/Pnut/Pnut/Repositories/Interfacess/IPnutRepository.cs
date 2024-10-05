@@ -9,6 +9,7 @@ namespace Pnut.Repositories.Interfacess
         BaseResponse AddGroupMember(AddGroupMemberRequest req);
         BaseResponse CreateGroup(CreateGroupRequest req);
         GetAllMemberedGroupResponse GetAllMemberedGroup(GetAllMemberedGroupRequest req);
+        GetGroupMembersResponse GetGroupMembers(GetGroupMembersRequest req);
         public GetTaskResopnse GetTask(GetTaskRequest req);
         User Login(LoginRequest req);
         BaseResponse Register(UserRegisterRequest req);

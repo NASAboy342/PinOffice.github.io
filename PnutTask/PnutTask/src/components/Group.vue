@@ -12,13 +12,15 @@
           :key="index"
           class="group-nav-bottun rounded-md mt-2"
           :index="index"
+          @click="activeIndex = index"
         >
           {{ groupNavObject.title }}
         </el-menu-item>
       </el-menu>
     </td>
     <td class="w-full group-work-space">
-      <GroupSprintBoard></GroupSprintBoard>
+      <GroupSprintBoard v-if="activeIndex == 0"></GroupSprintBoard>
+      <GroupAbout v-if="activeIndex == 1"></GroupAbout>
     </td>
   </table>
 </template>
@@ -27,6 +29,7 @@ import { ElButton } from "element-plus";
 import { ref } from "vue";
 import GroupSprintBoard from "@/components/GroupSprintBoard.vue";
 import { useGroupStore } from "@/stores/useGroupStore";
+import GroupAbout from "@/components/GroupAbout.vue";
 
 const groupStore = useGroupStore();
 interface IGroupNavObject {

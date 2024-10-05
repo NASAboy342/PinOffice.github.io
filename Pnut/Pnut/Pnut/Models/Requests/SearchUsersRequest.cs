@@ -6,7 +6,7 @@ namespace Pnut.Models.Requests
     public class SearchUsersRequest
     {
         public string UserName { get; set; }
-        public bool IsById => int.TryParse(UserName, out int id);
+        public int Id => int.TryParse(UserName, out int id)? id : 0;
 
         public bool IsValidRequest(out BaseResponse errorResponse)
         {

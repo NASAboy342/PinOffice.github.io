@@ -67,5 +67,22 @@ namespace Pnut.Controllers
                 };
             }
         }
+
+        [HttpPost("get-group-members")]
+        public GetGroupMembersResponse GetGroupMembers(GetGroupMembersRequest req)
+        {
+            try
+            {
+                return _groupService.GetGroupMembers(req);
+            }
+            catch (Exception ex)
+            {
+                return new GetGroupMembersResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
     }
 }

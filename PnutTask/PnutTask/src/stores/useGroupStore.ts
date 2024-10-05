@@ -14,4 +14,6 @@ export const useGroupStore = defineStore('group', () => {
     return {
         recentlyEnteredGroup
     }
+},{
+    persist: true
 })

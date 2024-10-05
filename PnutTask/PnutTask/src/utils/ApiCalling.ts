@@ -13,8 +13,20 @@ import { ISwichtUserWorkModeRequest } from '@/Models/Requests/SwichtUserWorkMode
 import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js';
 import { GetAllMemberedGroupsRequest } from '../Models/Requests/GetAllMemberedGroup.js';
 import { AllMemberedGroupResponse } from '@/Models/Responses/AllMemberedGroupResponse.js';
+import { GetGroupMembersRequest } from '@/Models/Requests/GetGroupMembersRequest.js';
+import { GetGroupMembersResponse } from '@/Models/Responses/GetGroupMembersResponse.js';
+import { SearchUsersResponse } from '@/Models/Responses/SearchUsersResponse.js';
+import { SearchUsersRequest } from '@/Models/Requests/SearchUsersRequest.js';
 
 export class ApiCalling {
+    static async SearchUser(req: SearchUsersRequest): Promise<SearchUsersResponse> {
+        const response = await Api.Post<SearchUsersRequest, SearchUsersResponse>('User/search-users', req);
+        return response;
+    }
+    static async GetGroupMembers(req: GetGroupMembersRequest): Promise<GetGroupMembersResponse> {
+        const response = await Api.Post<GetGroupMembersRequest, GetGroupMembersResponse>('Group/get-group-members', req);
+        return response;
+    }
     static async GetAllMemberedGroups(req: GetAllMemberedGroupsRequest): Promise<AllMemberedGroupResponse> {
         const response = await Api.Post<GetAllMemberedGroupsRequest, AllMemberedGroupResponse>('Group/get-all-membered-group', req);
         return response;

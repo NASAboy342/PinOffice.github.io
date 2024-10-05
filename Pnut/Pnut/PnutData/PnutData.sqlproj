@@ -78,5 +78,6 @@
     <Build Include="dbo\StoreProcedures\Pnut_GetAllGroup.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_AddGroupMember.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_SearchUsers.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_GetGroupMembers.sql" />
   </ItemGroup>
 </Project>

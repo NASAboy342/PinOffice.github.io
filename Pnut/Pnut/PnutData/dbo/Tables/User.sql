@@ -6,5 +6,6 @@
 	[UserType] INT,
 	[ProfilePicturePath] NVARCHAR (MAX),
 	[WorkMode] NVARCHAR (100) NOT NULL DEFAULT('Individual'),
+	[ImgUrl] NVARCHAR (MAX) DEFAULT('') NOT NULL,
 	CONSTRAINT CK_WorkMode CHECK ([WorkMode] IN ('Individual', 'Cooperate'))
 )

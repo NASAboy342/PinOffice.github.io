@@ -45,5 +45,6 @@ app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 app.MapRazorPages();
+app.UseWebSockets();
 
 app.Run();

@@ -28,5 +28,10 @@ namespace Pnut.Services.Implementations
         {
             return _pnutRepository.GetAllMemberedGroup(req);
         }
+
+        public GetGroupMembersResponse GetGroupMembers(GetGroupMembersRequest req)
+        {
+            return _pnutRepository.GetGroupMembers(req);
+        }
     }
 }

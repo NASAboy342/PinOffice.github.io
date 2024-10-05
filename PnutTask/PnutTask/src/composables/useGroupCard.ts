@@ -4,6 +4,8 @@ import { ApiCalling } from '../utils/ApiCalling.js';
 import { useUserStore } from '../stores/useUserStore.js';
 import { AllMemberedGroupResponse, Group } from '@/Models/Responses/AllMemberedGroupResponse.js';
 import { useGroupStore } from '../stores/useGroupStore.js';
+import { GetGroupMembersResponse } from '../Models/Responses/GetGroupMembersResponse.js'; 
+import { GetGroupMembersRequest } from '../Models/Requests/GetGroupMembersRequest.js';
 
 export function useGroupCard(){
 
@@ -30,9 +32,21 @@ export function useGroupCard(){
         }
     }
 
+    const GetGroupMembers = async () => {
+        if(group.recentlyEnteredGroup.groupId === 0) {
+            return <GetGroupMembersResponse>{}
+        }
+        const req = <GetGroupMembersRequest>{
+            groupId: group.recentlyEnteredGroup.groupId
+        }
+        const response:GetGroupMembersResponse = await ApiCalling.GetGroupMembers(req);
+        return response;
+    }
+
     return {
         GetAllGroup,
         SetRecentlyEnteredGroup,
-        UnsetRecentlyEnteredGroup
+        UnsetRecentlyEnteredGroup,
+        GetGroupMembers
     }
 }
