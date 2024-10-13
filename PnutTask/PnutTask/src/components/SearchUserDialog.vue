@@ -18,6 +18,11 @@
       :data="searchUser.searchResult.value.users"
       class="w-full search-user-result-table"
     >
+      <el-table-column prop="profilePicturePath" label="">
+        <template #default="{ row }">
+          <div @click="SelectUser(row)" class="cursor-pointer w-[50px]"><ProfileImg :url="row.profilePicturePath"></ProfileImg></div>
+        </template>
+      </el-table-column>
       <el-table-column prop="id" label="Id">
         <template #default="{ row }">
           <div @click="SelectUser(row)" class="cursor-pointer">{{ row.id }}</div>
@@ -45,6 +50,7 @@ import { computed, ref } from "vue";
 import { UseSearchUser } from "@/composables/useSearchUser";
 import { Pointer } from "@element-plus/icons-vue/dist/types/components/index.js";
 import { User } from "@/Models/User";
+import ProfileImg from "@/components/ProfileImg.vue"
 
 interface Prop {
   dialogFormVisible: boolean;

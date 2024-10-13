@@ -6,6 +6,7 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item @click="user.Logout()">Logout</el-dropdown-item>
+        <el-dropdown-item><RouterLink to="/account">Account</RouterLink></el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>

@@ -44,6 +44,15 @@ namespace Pnut.Services.Implementations
             };
         }
 
+        public GetProfileImgPathsResponse GetProfileImgPaths()
+        {
+            var imgs = _pnutRepository.GetProfileImgPaths();
+            return new GetProfileImgPathsResponse
+            {
+                Imgs = imgs
+            };
+        }
+
         public SwichtUserWorkModeResponse SwichtUserWorkMode(SwichtUserWorkModeRequest req)
         {
             var result = _pnutRepository.SwichtUserWorkMode(req);
@@ -62,6 +71,29 @@ namespace Pnut.Services.Implementations
                 WorkModeAsString = req.WorkMode.ToString(),
                 ErrorCode = result.ErrorCode,
                 ErrorMessage = result.ErrorMessage,
+            };
+        }
+
+        public GetUsersInfoResponse GetUsersInfo(GetUsersInfoRequest req)
+        {
+            return new GetUsersInfoResponse
+            {
+                User = _pnutRepository.GetUsersInfo(req)
+            };
+        }
+
+        public BaseResponse UpdateProfileInfo(UpdateProfileInfoRequest req)
+        {
+            return _pnutRepository.UpdateProfileInfo(req);
+        }
+
+        public SyncAccountInfoResponse SyncAccountInfo(SyncAccountInfoRequest req)
+        {
+            var user = _pnutRepository.GetAccountInfo(req);
+            user.SetWorkModeValue();
+            return new SyncAccountInfoResponse
+            {
+                User = user
             };
         }
     }
