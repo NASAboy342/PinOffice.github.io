@@ -101,9 +101,11 @@ export function useUserInfo(){
         if(response.errorCode === 0){
             user.userInfo.workMode = response.workMode;
             user.userInfo.workModeAsString = response.workModeAsString;
+            router.push({ name: "home" });
             alertStatus.SetAlert('success', response.errorMessage)
         }
         else{
+            router.push({ name: "home" });
             alertStatus.SetAlert('error', response.errorMessage)
         }
     }

@@ -17,7 +17,7 @@ namespace Pnut.Repositories.Implementations
             {
                 req.GroupId,
                 req.UserId,
-                req.UserPosition,
+                userPosition = req.UserPosition.ToString(),
                 req.InviterUserId
             }).FirstOrDefault() ?? new BaseResponse();
         }

@@ -23,8 +23,13 @@ import { UpdateProfileInfoRequest } from '@/Models/Requests/UpdateProfileInfoReq
 import { GetProfileImgPathsResponse } from '../Models/Responses/GetProfileImgPathsResponse.js'
 import { SyncAccountInfoRequest } from '@/Models/Requests/SyncAccountInfoRequest.js';
 import { SyncAccountInfoResponse } from '../Models/Responses/SyncAccountInfoResponse.js';
+import { AddGroupMemberRequest } from '@/Models/Requests/AddGroupMemberRequest.js';
 
 export class ApiCalling {
+    static async AddGroupMember(req: AddGroupMemberRequest): Promise<BaseResponse.BaseResponse> {
+        const response = await Api.Post<AddGroupMemberRequest, BaseResponse.BaseResponse>('Group/add-group-member',req);
+        return response;
+    }
     static async SyncAccountInfo(req: SyncAccountInfoRequest): Promise<SyncAccountInfoResponse> {
         const response = await Api.Post<SyncAccountInfoRequest, SyncAccountInfoResponse>('User/sync-account-info', req);
         return response;

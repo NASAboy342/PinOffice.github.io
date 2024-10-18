@@ -25,7 +25,7 @@ BEGIN
 		RETURN
 	END
 
-	IF EXISTS (SELECT TOP 1 1 FROM [dbo].[GroupMember] WHERE [UserId] = @userId)
+	IF EXISTS (SELECT TOP 1 1 FROM [dbo].[GroupMember] WHERE [GroupId] = @groupId AND [UserId] = @userId)
 	BEGIN
 		SELECT 10 AS ErrorCode, 'User is already a member of the group' AS ErrorMessage
 		RETURN

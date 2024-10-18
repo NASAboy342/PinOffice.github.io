@@ -1,12 +1,11 @@
 <template>
     <div class="username">{{ userInfo.userInfo.name }}</div>
-    <el-icon class="user-icon">
-      <User />
-    </el-icon>
+    <ProfileImg class="w-[22px]" :url="userInfo.userInfo.profilePicturePath"></ProfileImg>
     <div class="border-right"></div>
 </template>
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/useUserStore";
+import ProfileImg from "@/components/ProfileImg.vue";
 
 const userInfo = useUserStore();
 </script>
