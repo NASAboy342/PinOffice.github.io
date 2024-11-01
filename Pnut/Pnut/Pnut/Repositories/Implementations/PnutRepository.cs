@@ -17,7 +17,7 @@ namespace Pnut.Repositories.Implementations
             {
                 req.GroupId,
                 req.UserId,
-                req.UserPosition,
+                userPosition = req.UserPosition.ToString(),
                 req.InviterUserId
             }).FirstOrDefault() ?? new BaseResponse();
         }
@@ -30,6 +30,14 @@ namespace Pnut.Repositories.Implementations
                 req.GroupDescription,
                 req.CreatorUserId
             }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public User GetAccountInfo(SyncAccountInfoRequest req)
+        {
+            return GetData<User>("[dbo].[Pnut_GetAccountInfo]", new
+            {
+                req.UserId
+            }).FirstOrDefault() ?? new User();
         }
 
         public GetAllMemberedGroupResponse GetAllMemberedGroup(GetAllMemberedGroupRequest req)
@@ -58,6 +66,11 @@ namespace Pnut.Repositories.Implementations
             };
         }
 
+        public List<Img> GetProfileImgPaths()
+        {
+            return GetData<Img>("[dbo].[Pnut_GetProfileImgPaths]", null).ToList();
+        }
+
         public GetTaskResopnse GetTask(GetTaskRequest req)
         {
             var tasks = GetData<TaskInfo>("[dbo].[Pnut_GetTask]", new
@@ -74,6 +87,14 @@ namespace Pnut.Repositories.Implementations
             {
                 Tasks = tasks
             };
+        }
+
+        public User GetUsersInfo(GetUsersInfoRequest req)
+        {
+            return GetData<User>("[dbo].[Pnut_GetUsersInfo]", new
+            {
+                req.Id
+            }).FirstOrDefault() ?? new User();
         }
 
         public User Login(LoginRequest req)
@@ -124,6 +145,16 @@ namespace Pnut.Repositories.Implementations
             {
                 req.UserId,
                 workMode = req.WorkMode.ToString()
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public BaseResponse UpdateProfileInfo(UpdateProfileInfoRequest req)
+        {
+            return GetData<BaseResponse>("[dbo].[Pnut_UpdateProfileInfo]", new
+            {
+                id = req.Id,
+                name = req.Username,
+                profilePicturePath = req.ProfileImgPath
             }).FirstOrDefault() ?? new BaseResponse();
         }
 

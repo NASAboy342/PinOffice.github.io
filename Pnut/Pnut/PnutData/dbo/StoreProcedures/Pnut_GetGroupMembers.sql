@@ -4,7 +4,7 @@ AS
 BEGIN
 	SET NOCOUNT ON
 	SELECT 
-	u.[ImgUrl] AS [Img],
+	u.[ProfilePicturePath] AS [Img],
 	u.[Id] AS [Id],
 	u.[UserName] AS [Name],
 	gm.[UserPosition] AS [Position]

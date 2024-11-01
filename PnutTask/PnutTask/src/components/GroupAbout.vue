@@ -12,7 +12,7 @@
         {{ groupStore.recentlyEnteredGroup.name }}
       </div>
       <div class="about-wrapper-group-profile-member-count opacity-50">
-        {{ membersCount }} members
+        {{ groupAbout.membersCount.value }} members
       </div>
       <el-button
         class="w-full add-members-button mt-4"
@@ -26,7 +26,7 @@
     >
       <!-- <div>Members</div> -->
       <el-table
-        :data="members.groupMembers"
+        :data="groupAbout.members.value.groupMembers"
         class="w-full about-wrapper-group-members-table"
       >
         <el-table-column prop="img" label="" width="80">
@@ -49,14 +49,14 @@
     </div>
     <SearchUserDialog
       :dialog-form-visible="searchDialogFormVisible"
-      @select-user-id="selecteNewMemberId"
+      @select-user-id="groupAbout.selecteNewMemberId"
       @close-dialog="searchDialogFormVisible = false"
     >
     </SearchUserDialog>
     <el-dialog
-      v-model="addMemberConfirmDialogVisible"
+      v-model="groupAbout.addMemberConfirmDialogVisible.value"
       width="500"
-      @close="CloseAddMemberConfirmDialog()"
+      @close="groupAbout.CloseAddMemberConfirmDialog()"
       :show-close="false"
       class="add-member-confirm-dialog"
     >
@@ -70,19 +70,19 @@
           <img
             class="w-full"
             :src="
-              newMemberInfo.profilePicturePath == '' ||
-              newMemberInfo.profilePicturePath == undefined
+              groupAbout.newMemberInfo.value.profilePicturePath == '' ||
+              groupAbout.newMemberInfo.value.profilePicturePath == undefined
                 ? '\\public\\img\\broken-img.png'
-                : newMemberInfo.profilePicturePath
+                : groupAbout.newMemberInfo.value.profilePicturePath
             "
             alt="\public\img\broken-img.png"
           />
         </div>
         <div class="add-member-confirm-dialog-username text-black">
-          Username: <span class="font-bold">{{ newMemberInfo.name }}</span>
+          Username: <span class="font-bold">{{ groupAbout.newMemberInfo.value.name }}</span>
         </div>
         <div class="add-member-confirm-dialog-user-id text-black">
-          Id: <span class="font-bold">{{ newMemberInfo.id }}</span>
+          Id: <span class="font-bold">{{ groupAbout.newMemberInfo.value.id }}</span>
         </div>
         <div
           class="add-member-confirm-dialog-position text-black flex flex-row gap-2"
@@ -90,7 +90,7 @@
           As:
           <el-select
             remote
-            v-model="groupAbout.newMembersPositionAsString"
+            v-model="groupAbout.newMembersPositionAsString.value"
             placeholder="Select member position"
             class="add-member-confirm-dialog-position-select w-32"
             default-first-option
@@ -98,13 +98,13 @@
             <el-option
               label="Member"
               @click="
-                groupAbout.newMembersPosition.value = EnumGroupPosition.Member
+                groupAbout.changeMemberPosition(EnumGroupPosition.Member)
               "
             />
             <el-option
               label="Admin"
               @click="
-                groupAbout.newMembersPosition.value = EnumGroupPosition.Admin
+                groupAbout.changeMemberPosition(EnumGroupPosition.Admin)
               "
             />
           </el-select>
@@ -113,11 +113,11 @@
       <template #footer>
         <div class="dialog-footer">
           <el-button
-            @click="CloseAddMemberConfirmDialog()"
+            @click="groupAbout.CloseAddMemberConfirmDialog()"
             class="add-member-confirm-dialog-cancel-bt"
             >Cancel</el-button
           >
-          <el-button type="primary">Yes</el-button>
+          <el-button @click="groupAbout.addMember()" type="primary">Yes</el-button>
         </div>
       </template>
     </el-dialog>
@@ -138,22 +138,10 @@ const groupCard = useGroupCard();
 const groupStore = useGroupStore();
 const groupAbout = useGroupAbout();
 
-const members = ref<GetGroupMembersResponse>(<GetGroupMembersResponse>{});
-const membersCount = ref<number>();
-onMounted(async () => {
-  members.value = await groupCard.GetGroupMembers();
-  membersCount.value = members.value.groupMembers.length;
-});
+
 const searchDialogFormVisible = ref<boolean>(false);
-const newMemberInfo = ref<User>(<User>{});
-const addMemberConfirmDialogVisible = ref<boolean>(false);
-const selecteNewMemberId = (userInfo) => {
-  newMemberInfo.value = userInfo;
-  addMemberConfirmDialogVisible.value = true;
-};
-const CloseAddMemberConfirmDialog = () => {
-  addMemberConfirmDialogVisible.value = false;
-};
+
+
 </script>
 
 <style>

@@ -1,0 +1,10 @@
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\bin\Debug\AiData.dacpac
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\bin\Debug\AiData.dll
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\bin\Debug\AiData.pdb
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\AiData.sqlproj.AssemblyReference.cache
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\Model.xml
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\refactor.xml
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\postdeploy.sql
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\predeploy.sql
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\AiData.dll
+D:\Clones\PinOffice.github.io\AiData\AiData\AiData\obj\Debug\AiData.pdb

@@ -38,6 +38,10 @@ namespace Pnut.Enums
         UnableToDeleteGroup = 15,
         [Description("Group does not exist")]
         GroupDoesNotExist = 16,
+        [Description("Username is too long")]
         UserNameIsTooLong = 17,
+        [Description("Username is taken")]
+        UsernameIsTaken = 18,
+
     }
 }

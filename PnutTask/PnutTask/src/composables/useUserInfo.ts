@@ -10,7 +10,9 @@ import { LoginResponse } from '@/Models/Responses/LoginResponse.js';
 import { EnumWorkMode } from '@/Models/Enums/EnumWorkMode.js';
 import { ISwichtUserWorkModeRequest } from '@/Models/Requests/SwichtUserWorkModeRequest.js';
 import { useAlertStatusStore } from '@/stores/useAlertStatusStore.js';
-import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js'
+import { ISwichtUserWorkModeResponse } from '@/Models/Responses/SwichtUserWorkModeResponse.js';
+import { SyncAccountInfoRequest } from '@/Models/Requests/SyncAccountInfoRequest.js';
+import { SyncAccountInfoResponse } from '@/Models/Responses/SyncAccountInfoResponse.js';
 
 export function useUserInfo(){
 
@@ -40,6 +42,18 @@ export function useUserInfo(){
             router.push({ name: "home"});
         }
         return response;
+    }
+
+    const syncAccountInfo = async () => {
+        const req = <SyncAccountInfoRequest>{
+            userId: user.userInfo.id
+        }
+        const response: SyncAccountInfoResponse = await ApiCalling.SyncAccountInfo(req);
+        if(response.errorCode !== 0){
+            alertStatus.SetAlert('error', response.errorMessage);
+            return
+        }
+        user.userInfo = response.user;
     }
 
     const Logout = () => {
@@ -87,9 +101,11 @@ export function useUserInfo(){
         if(response.errorCode === 0){
             user.userInfo.workMode = response.workMode;
             user.userInfo.workModeAsString = response.workModeAsString;
+            router.push({ name: "home" });
             alertStatus.SetAlert('success', response.errorMessage)
         }
         else{
+            router.push({ name: "home" });
             alertStatus.SetAlert('error', response.errorMessage)
         }
     }
@@ -99,6 +115,7 @@ export function useUserInfo(){
         Login,
         Register,
         Logout,
-        SwichtUserWorkMode
+        SwichtUserWorkMode,
+        syncAccountInfo
     }
 }

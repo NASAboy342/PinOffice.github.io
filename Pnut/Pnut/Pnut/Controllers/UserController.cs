@@ -85,5 +85,73 @@ namespace Pnut.Controllers
                 };
             }
         }
+
+        [HttpPost("get-users-info")]
+        public GetUsersInfoResponse GetUsersInfo(GetUsersInfoRequest req)
+        {
+            try
+            {
+                return _userService.GetUsersInfo(req);
+            }
+            catch (Exception ex)
+            {
+                return new GetUsersInfoResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+
+        [HttpPost("update-profile-info")]
+        public BaseResponse UpdateProfileInfo(UpdateProfileInfoRequest req)
+        {
+            try
+            {
+                return _userService.UpdateProfileInfo(req);
+            }
+            catch (Exception ex)
+            {
+                return new BaseResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+            
+        [HttpPost("get-profile-img-paths")]
+        public GetProfileImgPathsResponse GetProfileImgPaths()
+        {
+            try
+            {
+                return _userService.GetProfileImgPaths();
+            }
+            catch (Exception ex)
+            {
+                return new GetProfileImgPathsResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
+
+        [HttpPost("sync-account-info")]
+        public SyncAccountInfoResponse SyncAccountInfo(SyncAccountInfoRequest req)
+        {
+            try
+            {
+                return _userService.SyncAccountInfo(req);
+            }
+            catch (Exception ex)
+            {
+                return new SyncAccountInfoResponse
+                {
+                    ErrorCode = ErrorCode.GeneralError,
+                    ErrorMessage = ex.Message
+                };
+            }
+        }
     }
 }
