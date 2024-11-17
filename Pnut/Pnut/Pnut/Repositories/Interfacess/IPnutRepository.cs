@@ -1,6 +1,8 @@
 ﻿using Pnut.Models;
 using Pnut.Models.Requests;
 using Pnut.Models.Response;
+using Pnut.Models.Sim1;
+using Pnut.Models.Sim1.Request;
 
 namespace Pnut.Repositories.Interfacess
 {
@@ -22,5 +24,11 @@ namespace Pnut.Repositories.Interfacess
         BaseResponse UpdateProfileInfo(UpdateProfileInfoRequest req);
         BaseResponse UpdateTasks(UpdateTasksRequest req);
         BaseResponse UpdateTasksDisplayOrder(UpdateTasksDisplayOrderRequest req);
+        List<ScenarioTask> GetGroupTask(GetGroupTaskRequest req);
+        List<GroupSprint> GetGroupSprint(GetGroupSprintRequest req);
+        List<SprintScenario> GetSprintScenario(GetSprintScenarioRequest req);
+        BaseResponse CreateGroupSprint(CreateGroupSprintRequest req);
+        BaseResponse Sim1SaveDna(SaveDnaRequest req);
+        List<Dna> Sim1GetDna(GetDnaRequest req);
     }
 }

@@ -17,7 +17,8 @@ builder.Services.AddSingleton<IGameProviderRepository, GameProviderRepository>()
 builder.Services.AddSingleton<IFakerService, FakerService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IGroupService, GroupService>();
-
+builder.Services.AddSingleton<IGroupTaskService, GroupTaskService>();
+builder.Services.AddSingleton<ISim1Service, Sim1Service>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

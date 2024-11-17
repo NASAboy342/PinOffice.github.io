@@ -41,7 +41,7 @@ const isRootAccount = ref(userStore.userInfo.id === 1);
       :ellipsis="false"
     >
       <el-menu-item index="0" class="logo"
-        ><img src="\public\BaseLogo.png" alt="\public\BaseLogo.png"
+        ><img src="\BaseLogo.png" alt="\BaseLogo.png"
       /></el-menu-item>
       <el-menu-item index="1">
         <RouterLink to="/">Home</RouterLink>

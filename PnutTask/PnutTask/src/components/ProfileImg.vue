@@ -3,7 +3,7 @@
     class="w-full"
     :src="
       prop.url == '' || prop.url == undefined
-        ? '\\public\\img\\broken-img.png'
+        ? '\\img\\broken-img.png'
         : prop.url
     "
     :alt="prop.url"

@@ -1,6 +1,8 @@
 <template>
     <div class="username">{{ userInfo.userInfo.name }}</div>
-    <ProfileImg class="w-[22px]" :url="userInfo.userInfo.profilePicturePath"></ProfileImg>
+    <div class="w-[22px]">
+        <ProfileImg :url="userInfo.userInfo.profilePicturePath"></ProfileImg>
+    </div>
     <div class="border-right"></div>
 </template>
 <script lang="ts" setup>

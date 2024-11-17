@@ -1,6 +1,8 @@
 ﻿using Pnut.Models;
 using Pnut.Models.Requests;
 using Pnut.Models.Response;
+using Pnut.Models.Sim1;
+using Pnut.Models.Sim1.Request;
 using Pnut.Repositories.Interfacess;
 
 namespace Pnut.Repositories.Implementations
@@ -30,6 +32,11 @@ namespace Pnut.Repositories.Implementations
                 req.GroupDescription,
                 req.CreatorUserId
             }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public BaseResponse CreateGroupSprint(CreateGroupSprintRequest req)
+        {
+            throw new NotImplementedException();
         }
 
         public User GetAccountInfo(SyncAccountInfoRequest req)
@@ -66,9 +73,39 @@ namespace Pnut.Repositories.Implementations
             };
         }
 
+        public List<GroupSprint> GetGroupSprint(GetGroupSprintRequest req)
+        {
+            return GetData<GroupSprint>("[dbo].[Pnut_GetGroupSprint]", new
+            {
+                req.GroupId,
+                req.UserId
+            }).ToList();
+        }
+
+        public List<ScenarioTask> GetGroupTask(GetGroupTaskRequest req)
+        {
+            return GetData<ScenarioTask>("[dbo].[Pnut_GetGroupTask]", new
+            {
+                req.GroupId,
+                req.UserId,
+                req.SprintId,
+                req.ScenarioId,
+                req.TaskId,
+            }).ToList();
+        }
+
         public List<Img> GetProfileImgPaths()
         {
             return GetData<Img>("[dbo].[Pnut_GetProfileImgPaths]", null).ToList();
+        }
+
+        public List<SprintScenario> GetSprintScenario(GetSprintScenarioRequest req)
+        {
+            return GetData<SprintScenario>("[dbo].[Pnut_GetSprintScenario]", new
+            {
+                req.SprintId,
+                req.UserId
+            }).ToList();
         }
 
         public GetTaskResopnse GetTask(GetTaskRequest req)
@@ -136,6 +173,29 @@ namespace Pnut.Repositories.Implementations
                 req.CreatedOn,
                 req.DueOn,
                 req.ModifyOn
+            }).FirstOrDefault() ?? new BaseResponse();
+        }
+
+        public List<Dna> Sim1GetDna(GetDnaRequest req)
+        {
+            return GetData<Dna>("[dbo].[Pnut_Sim1GetDna]" , new
+            {
+                req.IsGetAll,
+                req.Generation,
+            }).ToList();
+        }
+
+        public BaseResponse Sim1SaveDna(SaveDnaRequest req)
+        {
+            return GetData<BaseResponse>("[dbo].[Pnut_Sim1SaveDna]", new
+            {
+                dna = AsDataTable(req.dnas),
+                req.EnergyRecord,
+                req.AgeInSec,
+                req.FinalEnergy,
+                req.ReproductionCount,
+                req.IsFemale,
+                req.ColorRGB,
             }).FirstOrDefault() ?? new BaseResponse();
         }
 

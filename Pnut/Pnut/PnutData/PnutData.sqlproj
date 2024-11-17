@@ -61,6 +61,9 @@
     <Folder Include="dbo\UserDefineTypes" />
     <Folder Include="dbo\StoreProcedures" />
     <Folder Include="Data" />
+    <Folder Include="dbo\Tables\Sim1AI" />
+    <Folder Include="dbo\UserDefineTypes\Sim1Ai" />
+    <Folder Include="dbo\StoreProcedures\Sim1" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Task.sql" />
@@ -85,6 +88,17 @@
     <Build Include="dbo\StoreProcedures\Pnut_GetUsersInfo.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_UpdateProfileInfo.sql" />
     <Build Include="dbo\StoreProcedures\Pnut_GetAccountInfo.sql" />
+    <Build Include="dbo\Tables\GroupSprint.sql" />
+    <Build Include="dbo\Tables\SprintScenario.sql" />
+    <Build Include="dbo\Tables\ScenarioTask.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_GetGroupTask.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_GetGroupSprint.sql" />
+    <Build Include="dbo\StoreProcedures\Pnut_GetSprintScenario.sql" />
+    <Build Include="dbo\Tables\Sim1AI\Dna.sql" />
+    <Build Include="dbo\UserDefineTypes\Sim1Ai\DnaType.sql" />
+    <Build Include="dbo\StoreProcedures\Sim1\Pnut_Sim1SaveDna.sql" />
+    <Build Include="dbo\StoreProcedures\Sim1\Pnut_Sim1GetDna.sql" />
+    <Build Include="dbo\Tables\Sim1AI\EnergyRecord.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Data\InitProfileImgPath.sql" />
