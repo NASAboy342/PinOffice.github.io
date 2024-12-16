@@ -22,6 +22,8 @@ let runTimeInSec = 0;
 let lastCheckRunTime = 0;
 let durationBetweenRunTimeCheckInSec = 20;
 let bestCellId = '';
+let isDrawNeuronIllustration = true;
+
 
 async function postData(url, data) {
     try {
@@ -129,7 +131,7 @@ function alterColor(colorValue) {
 }
 
 function checkToSpernEnergys() {
-    if(energys.length > 150){
+    if(energys.length > 10){
         return;
     }
     let isSpernEnergys = getIntRandom(0, 10) > 8;
@@ -190,70 +192,72 @@ function createCell(px = 0, py = 0, pColorR = 0, pColorG = 0, pColorB = 0, pdire
             energyHistory: 0,
             totalReproductionsCount: 0,
             dna: [
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[0] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[1] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[2] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[3] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[4] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[5] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[6] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[7] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[8] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[9] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[10] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[11] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[12] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[13] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[14] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[15] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[16] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[17] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[18] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[19] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[20] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[21] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[22] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[23] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[24] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[25] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[26] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[27] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[28] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[29] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[30] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[31] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[32] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[33] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[34] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[35] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[36] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[37] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[38] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[39] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[40] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[41] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[42] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[43] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[44] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[45] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[46] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[47] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[48] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[49] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[50] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[51] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[52] + getIntRandom(-0.5 , 0.5),
-
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[53] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[54] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[55] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[56] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[57] + getIntRandom(-0.5 , 0.5),
-                pDna.length === 0 ? getIntRandom(-10, 10) : pDna[58] + getIntRandom(-0.5 , 0.5)
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[0] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[1] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[2] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[3] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[4] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[5] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[6] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[7] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[8] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[9] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[10] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[11] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[12] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[13] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[14] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[15] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[16] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[17] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[18] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[19] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[20] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[21] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[22] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[23] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[24] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[25] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[26] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[27] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[28] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[29] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[30] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[31] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[32] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.707, 0.707) : pDna[33] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[34] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[35] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[36] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[37] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[38] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[39] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[40] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[41] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[42] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[43] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[44] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[45] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[46] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[47] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-0.866, 0.866) : pDna[48] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[49] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[50] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[51] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[52] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[53] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[54] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[55] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[56] + 0.02 * getIntRandom(-0.05 , 0.05),
+                pDna.length === 0 ? getIntRandom(-1.0, 1.0) : pDna[57] + 0.02 * getIntRandom(-0.05 , 0.05),
             ],
             lastDnaCheckInSec: 0,
             lastEnergyCheckInSec: 0,
             durationBetweenDnaCheckInSec: 5,
+            inPutNeurons: [],
+            firstLayerNeurons: [],
+            secondLayerNeurons: [],
+            outPutNeurons: [],
             turnRight: function (turnSpeed) {
                 this.direction = turnRight(this.direction, turnSpeed);
             },
@@ -273,57 +277,77 @@ function createCell(px = 0, py = 0, pColorR = 0, pColorG = 0, pColorB = 0, pdire
                 this.y += moveY(this.direction, this.speed);
                 this.energy -= this.speed / 10000;
             },
-            checkToChangeDirection: function(objectDistent, objectAngle, objectColorR, objectColorG, objectColorB, isFood, objectSpeed) {
+            calculateNeuronsReLU: function(inputs, dnaStartIndex, length) {
+                let result = 0;
+
+                for(let i = 1; i <= length; i++){
+                    result += inputs[i-1] * this.dna[dnaStartIndex+(i-1)];
+                }
+
+                return Math.max(...[0, result]);
+            },
+            calculateNeuronsSigmoid: function(inputs, dnaStartIndex, length) {
+                let result = 0;
+
+                for(let i = 1; i <= length; i++){
+                    result += inputs[i-1] * this.dna[dnaStartIndex+(i-1)];
+                }
+
+                return (1 / (1 + Math.exp(-result))).toFixed(8);
+            },
+            calculateNeuronsLinearActivation: function(inputs, dnaStartIndex, length) {
+                let result = 0;
+                for(let i = 1; i <= length; i++){
+                    result += inputs[i-1] * this.dna[dnaStartIndex+(i-1)];
+                }
+                return result;
+            },
+            checkToChangeDirection: function(objectDistent = 0, objectAngle = 0, objectColorR = 0, objectColorG = 0, objectColorB = 0, isFood = false, objectSpeed = 0) {
                 if(objectDistent > 50){
                     return;
                 }
 
-                // console.log("objectDistent: " + objectDistent)
-                // console.log("objectAngle: " + objectAngle)
-                // console.log("objectColorR: " + objectColorR)
-                // console.log("objectColorG: " + objectColorG)
-                // console.log("objectColorB: " + objectColorB)
-                // console.log("isFood: " + isFood)
-                // console.log("objectSpeed: " + objectSpeed)
+                let inPuts = [objectDistent, objectAngle, objectColorR - this.color.r, objectColorG - this.color.g, objectColorB - this.color.b, Number(isFood), objectSpeed]
+                this.inPutNeurons = inPuts;
 
-                let turningSpeeds = [
-                    10 + objectDistent * this.dna[0] + checkAngle(objectAngle * this.dna[1]) + Math.abs((objectColorR - this.color.r) * this.dna[2]) + (Math.abs(objectColorG - this.color.g) * this.dna[3]) + (Math.abs(objectColorB - this.color.b) * this.dna[4])  + Number(isFood) * this.dna[5] + objectSpeed * this.dna[6],
-                    20 + objectDistent * this.dna[7] + checkAngle(objectAngle * this.dna[8]) + Math.abs((objectColorR - this.color.r) * this.dna[9]) + (Math.abs(objectColorG - this.color.g) * this.dna[10]) + (Math.abs(objectColorB - this.color.b) * this.dna[11])  + Number(isFood) * this.dna[12] + objectSpeed * this.dna[13],
-                    30 + objectDistent * this.dna[14] + checkAngle(objectAngle * this.dna[15]) + Math.abs((objectColorR - this.color.r) * this.dna[16]) + (Math.abs(objectColorG - this.color.g) * this.dna[17]) + (Math.abs(objectColorB - this.color.b) * this.dna[18])  + Number(isFood) * this.dna[19] + objectSpeed * this.dna[20],
-                    40 + objectDistent * this.dna[21] + checkAngle(objectAngle * this.dna[22]) + Math.abs((objectColorR - this.color.r) * this.dna[23]) + (Math.abs(objectColorG - this.color.g) * this.dna[24]) + (Math.abs(objectColorB - this.color.b) * this.dna[25])  + Number(isFood) * this.dna[26] + objectSpeed * this.dna[27],
-                    50 + objectDistent * this.dna[28] + checkAngle(objectAngle * this.dna[29]) + Math.abs((objectColorR - this.color.r) * this.dna[30]) + (Math.abs(objectColorG - this.color.g) * this.dna[31]) + (Math.abs(objectColorB - this.color.b) * this.dna[32])  + Number(isFood) * this.dna[33] + objectSpeed * this.dna[34],
-                    0 + objectDistent * this.dna[52] + checkAngle(objectAngle * this.dna[53]) + Math.abs((objectColorR - this.color.r) * this.dna[54]) + (Math.abs(objectColorG - this.color.g) * this.dna[55]) + (Math.abs(objectColorB - this.color.b) * this.dna[56])  + Number(isFood) * this.dna[57] + objectSpeed * this.dna[58],
+                let firstLayer = [
+                    { id: 1, value: this.calculateNeuronsReLU(inPuts, 0, 7)},
+                    { id: 2, value: this.calculateNeuronsReLU(inPuts, 7, 7)},
+                    { id: 3, value: this.calculateNeuronsReLU(inPuts, 14, 7)},
+                    { id: 4, value: this.calculateNeuronsReLU(inPuts, 20, 7)},
+                    { id: 5, value: this.calculateNeuronsReLU(inPuts, 27, 7)},
                 ]
+                let firstLayerValues = firstLayer.map(l => l.value);
+                this.firstLayerNeurons = firstLayer;
 
-                // console.log("dnas", this.dna)
-                // console.log("turingSpeed", turningSpeeds)
-                // console.log("turningSpeeds", turnsSpeeds[5])
-
-                let turnDirection = [
-                    turningSpeeds[0] * this.dna[35] + turningSpeeds[1] * this.dna[36] + turningSpeeds[2] * this.dna[37] + turningSpeeds[3] * this.dna[38] + turningSpeeds[4] * this.dna[39],
-                    turningSpeeds[0] * this.dna[41] + turningSpeeds[1] * this.dna[42] + turningSpeeds[2] * this.dna[43] + turningSpeeds[3] * this.dna[44] + turningSpeeds[4] * this.dna[45],
-                    turningSpeeds[0] * this.dna[47] + turningSpeeds[1] * this.dna[48] + turningSpeeds[2] * this.dna[49] + turningSpeeds[3] * this.dna[50] + turningSpeeds[4] * this.dna[51],
+                let secondLayer = [
+                    { id: 1, value: this.calculateNeuronsReLU(firstLayerValues, 34, 5)},
+                    { id: 2, value: this.calculateNeuronsReLU(firstLayerValues, 39, 5)},
+                    { id: 3, value: this.calculateNeuronsReLU(firstLayerValues, 44, 5)},
                 ]
+                let secondLayerValues = secondLayer.map(l => l.value);
+                this.secondLayerNeurons = secondLayer;
+                
 
-                // console.log("turnDirection", turnDirection)
+                let outPutLayer = {
+                    isRight: this.calculateNeuronsSigmoid(secondLayerValues, 49, 3) < 0.5,
+                    angle: this.calculateNeuronsSigmoid(secondLayerValues, 52, 3) * (360 - 0) + 0,
+                    speed: this.calculateNeuronsSigmoid(secondLayerValues, 55, 3) * (2.1 - 0.1) + 0.1
+                }
+                this.outPutNeurons = [ Number(outPutLayer.isRight), outPutLayer.angle , outPutLayer.speed]
+                // if(this.id === bestCellId){
+                //     console.log("angle:" , this.outPutNeurons);
+                // }
 
-                if(turnDirection[0] > turnDirection[1]){
-                    this.turnRight(checkAngle(turningSpeeds[5]));
+                if(outPutLayer.isRight){
+                    this.turnRight(checkAngle(outPutLayer.angle));
                 }
                 else {
-                    this.turnLeft(checkAngle(turningSpeeds[5]));
+                    this.turnLeft(checkAngle(outPutLayer.angle));
                 }
 
-                this.speed = checkSpeed(turnDirection[2]);
+                this.speed = checkSpeed(outPutLayer.speed);
 
-
-                // if(Math.round(this.ageInSec - this.lastDirectionchangeAgeInSec) === this.changeDirectionIntervalInSeconds){
-                //     this.lastDirectionchangeAgeInSec = this.ageInSec;
-                //     this.changeRandomDirection();
-                // }
-                // else if(Math.round(this.ageInSec - this.lastDirectionchangeAgeInSec) > this.changeDirectionIntervalInSeconds){
-                //     this.lastDirectionchangeAgeInSec = this.ageInSec;
-                // }
             },
             handleWhenHitTheEdgeOfTheWorld: function() {
                 if(this.x < 1){
@@ -476,7 +500,7 @@ function createCell(px = 0, py = 0, pColorR = 0, pColorG = 0, pColorB = 0, pdire
                     this.lastDnaCheckInSec = this.ageInSec;
                     if(this.lastEnergyCheckInSec >= this.energy){
                         this.dna.forEach(dna => {
-                            dna = dna + getIntRandom(-0.5, 0.5);
+                            dna = dna + 0.02 * getIntRandom(-0.05 , 0.05);
                         });
                     }
                     this.lastEnergyCheckInSec = this.energy
@@ -587,6 +611,7 @@ async function populationControl(){
 
     if(cells.length < 50) {
         let dnas = await getStoredDnas();
+        //let dnas = [];
         if(cells.length < 1){
             for(let i = 0; i < 200; i++) {
                 if(dnas || dnas.length != 0){
@@ -601,7 +626,7 @@ async function populationControl(){
             let bestCell = cells.sort((a,b) => b.totalReproductionsCount - a.totalReproductionsCount)[0];
             for(let i = 0; i < 200; i++) {
                 if(dnas){
-                    createCell(0, 0, bestCell.color.r, bestCell.color.g, bestCell.color.b, -1, bestCell.speed, 0, bestCell.dna);
+                    createCell(0, 0, 0, 0, 0, -1, 0, 0, dnas);
                 }
                 else{
                     createCell(0, 0, bestCell.color.r, bestCell.color.g, bestCell.color.b, -1, bestCell.speed, 0, bestCell.dna);
@@ -628,6 +653,202 @@ function checkRunTime(){
     }
 }
 
+function drawNeuron(x, y, outPut = 0){
+    let radias =  ((1 / (1 + Math.exp(-outPut))).toFixed(8)) * (20 - 1) + 1
+    ctx.beginPath();
+    ctx.arc(x, y, radias, 0, Math.PI * 2);
+    ctx.fillStyle = 'orange';
+    ctx.fill();
+
+    ctx.font = '10px Arial';
+    ctx.fillStyle = 'white';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${outPut}`, x, y);
+}
+function drawOutPutNeuron(x, y, outPut = 0){
+    ctx.beginPath();
+    let hHight = 10;
+    let width = 80;
+    ctx.fillStyle = 'orange';
+    ctx.fill();
+    ctx.fillRect(x, y-hHight, width, hHight*2);
+
+    ctx.font = '20px Arial';
+    ctx.fillStyle = 'blue';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'left';
+    ctx.fillText(`${outPut}`, x+2, y);
+}
+
+function drawWeight(sx, sy, tx, ty, value = 0){
+    let opacity = ((1 / (1 + Math.exp(-value))).toFixed(8))
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(tx, ty);
+    ctx.strokeStyle = `rgba(255,0,0,${opacity})`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
+function drawBestCellNeurons(cell){
+    let inputLayer = [
+        {
+            id: 1,
+            x: 100,
+            y: 100,
+        },
+        {
+            id: 2,
+            x: 100,
+            y: 200,
+        },
+        {
+            id: 3,
+            x: 100,
+            y: 300,
+        },
+        {
+            id: 4,
+            x: 100,
+            y: 400,
+        },
+        {
+            id: 5,
+            x: 100,
+            y: 500,
+        },
+        {
+            id: 6,
+            x: 100,
+            y: 600,
+        },
+        {
+            id: 7,
+            x: 100,
+            y: 700,
+        }
+    ]
+
+    let firstLayer = [
+        {
+            id: 1,
+            x: 250,
+            y: 100,
+        },
+        {
+            id: 2,
+            x: 250,
+            y: 200,
+        },
+        {
+            id: 3,
+            x: 250,
+            y: 300,
+        },
+        {
+            id: 4,
+            x: 250,
+            y: 400,
+        },
+        {
+            id: 5,
+            x: 250,
+            y: 500,
+        }
+    ]
+
+    let secondLayer = [
+        {
+            id: 1,
+            x: 400,
+            y: 100,
+        },
+        {
+            id: 2,
+            x: 400,
+            y: 200,
+        },
+        {
+            id: 3,
+            x: 400,
+            y: 300,
+        }
+    ]
+
+    let outPutLayer = [
+        {
+            id: 1,
+            x: 550,
+            y: 100,
+        },
+        {
+            id: 2,
+            x: 550,
+            y: 200,
+        },
+        {
+            id: 3,
+            x: 550,
+            y: 300,
+        }
+    ]
+
+    inputLayer.forEach((i, index) => {
+        let nValue = 0
+        if(cell){
+            nValue = cell.inPutNeurons[index];
+        }
+        firstLayer.forEach(t => {
+            drawWeight(i.x, i.y, t.x, t.y, nValue.toFixed(3));
+        })
+        drawNeuron(i.x, i.y, nValue.toFixed(3));
+    })
+    firstLayer.forEach((i,index) => {
+        let nValue = 0
+        if(cell){
+            nValue = cell.firstLayerNeurons[index].value;
+        }
+        secondLayer.forEach(t => {
+            drawWeight(i.x, i.y, t.x, t.y, nValue.toFixed(3));
+        })
+        drawNeuron(i.x, i.y,nValue.toFixed(3));
+    })
+    secondLayer.forEach((i, index) => {
+        let nValue = 0
+        if(cell){
+            nValue = cell.secondLayerNeurons[index].value;
+        }
+        outPutLayer.forEach(t => {
+            drawWeight(i.x, i.y, t.x, t.y, nValue.toFixed(3));
+        })
+        drawNeuron(i.x, i.y, nValue.toFixed(3));
+    })
+    outPutLayer.forEach((i,index) => {
+        let nValue = 0;
+        
+        if(cell){
+            nValue = cell.outPutNeurons[index];
+        }
+        drawOutPutNeuron(i.x, i.y, nValue.toFixed(3));
+    })
+}
+
+function drawNeuronIllustration(){
+    if(!isDrawNeuronIllustration){
+        return;
+    }
+    ctx.strokeStyle = 'gray'; 
+    ctx.lineWidth = 3; 
+    ctx.fillStyle = `rgba(255, 255, 255, 0.2)`;
+    ctx.fill();
+    ctx.strokeRect(world.x, world.y, world.width/3, world.height);
+    ctx.fillRect(world.x, world.y, world.width/3, world.height);
+
+    let bestCell = cells.find(cell => cell.id === bestCellId);
+    drawBestCellNeurons(bestCell);
+}
+
 document.addEventListener("keydown", (e) => {
     if(e.key === " "){
         for(let i = 0; i < 200; i++) { 
@@ -636,6 +857,9 @@ document.addEventListener("keydown", (e) => {
     }
     if(e.key === "p"){
         isPause =!isPause;
+    }
+    if(e.key === "i"){
+        isDrawNeuronIllustration = !isDrawNeuronIllustration
     }
 });
 
@@ -663,7 +887,7 @@ function render() {
     drawWorld();
     drawEnergy();
     drawCells();
-    
+    drawNeuronIllustration();
 }
 
 // Main game loop

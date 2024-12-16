@@ -1,7 +1,9 @@
+using Pnut.Cache.Popop;
 using Pnut.Repositories.Implementations;
 using Pnut.Repositories.Interfacess;
 using Pnut.Services.Implementations;
 using Pnut.Services.Interfacess;
+using Pnut.Services.Popop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,8 @@ builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IGroupService, GroupService>();
 builder.Services.AddSingleton<IGroupTaskService, GroupTaskService>();
 builder.Services.AddSingleton<ISim1Service, Sim1Service>();
+builder.Services.AddSingleton<IPopopService, PopopService>();
+builder.Services.AddSingleton<PopopStatusCache>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
@@ -40,7 +44,11 @@ app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseWebSockets();
 
 app.MapControllers();
+
+var popopStatusCache = app.Services.GetRequiredService<PopopStatusCache>();
+Task.Run(() => popopStatusCache.Run());
 
 app.Run();
