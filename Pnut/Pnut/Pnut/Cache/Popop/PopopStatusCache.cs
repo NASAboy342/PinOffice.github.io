@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 using Pnut.Models.Popop;
+using Pnut.Queues.PopopQueues;
+using Pnut.Services.Interfacess;
+using System.Numerics;
 using System.Runtime.Caching;
 
 namespace Pnut.Cache.Popop
@@ -7,6 +10,13 @@ namespace Pnut.Cache.Popop
     public class PopopStatusCache : CacheBase<PopopStatus>
     {
         private readonly string _key = "PopopStatus";
+        private readonly PlayerSyncQueue _playerSyncQueue;
+        private readonly ILoggerService _loggerService;
+        public PopopStatusCache(PlayerSyncQueue playerSyncQueue, ILoggerService loggerService)
+        {
+            _playerSyncQueue = playerSyncQueue;
+            _loggerService = loggerService;
+        }
         protected override CacheItemPolicy GetItemPolicy()
         {
             return new CacheItemPolicy()
@@ -34,18 +44,39 @@ namespace Pnut.Cache.Popop
         {
             while (true)
             {
-                if (!Contains(_key))
+                try
                 {
-                    continue;
+                    if (!Contains(_key))
+                    {
+                        continue;
+                    }
+                    var popopStatus = await GetPopopStatus();
+                    var playerStatusUpdate = !_playerSyncQueue.IsEmpty() ? _playerSyncQueue.Dequeue() : new Player();
+                    popopStatus.Balls.ForEach(b =>
+                    {
+                        b.MoveInRandomDirection(popopStatus.World);
+                        b.Aging();
+                    });
+                    popopStatus.Players.ForEach(p =>
+                    {
+                        p.Aging();
+                        p.Sync(playerStatusUpdate);
+                        p.Shoot(popopStatus.Bullets);
+                    });
+                    popopStatus.Bullets.ForEach(b =>
+                    {
+                        b.Move();
+                    });
+                    popopStatus.Bullets.RemoveAll(b => b.IsHitWorldBorder(popopStatus.World));
+                    popopStatus.Players.RemoveAll(p => p.IsAfkTooLong());
+
+                    UpdatePopopStatus(popopStatus);
+                    await Task.Delay(11);
                 }
-                var popopStatus = await GetPopopStatus();
-                popopStatus.Balls.ForEach(b =>
+                catch(Exception ex)
                 {
-                    b.MoveInRandomDirection(popopStatus.World);
-                    b.Aging();
-                });
-                UpdatePopopStatus(popopStatus);
-                await Task.Delay(11);
+                    _loggerService.Error($"Update PopopStatus got error: {ex}");
+                }
             }
         }
     }

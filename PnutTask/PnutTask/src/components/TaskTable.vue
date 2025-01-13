@@ -281,7 +281,6 @@ const UpdateTask = async () => {
     dueOn: updatingTask.value.dueOn,
     modifyOn: updatingTask.value.modifyOn,
   });
-  updateTaskRequest.value.dueOn.setHours(updateTaskRequest.value.dueOn.getHours() +7);
   const response = await ApiCalling.UpdateTask(updateTaskRequest.value);
   GetTasks();
   showUpdateDialog.value = false;

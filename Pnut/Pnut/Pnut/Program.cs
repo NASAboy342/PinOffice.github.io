@@ -1,4 +1,5 @@
 using Pnut.Cache.Popop;
+using Pnut.Queues.PopopQueues;
 using Pnut.Repositories.Implementations;
 using Pnut.Repositories.Interfacess;
 using Pnut.Services.Implementations;
@@ -23,6 +24,8 @@ builder.Services.AddSingleton<IGroupTaskService, GroupTaskService>();
 builder.Services.AddSingleton<ISim1Service, Sim1Service>();
 builder.Services.AddSingleton<IPopopService, PopopService>();
 builder.Services.AddSingleton<PopopStatusCache>();
+builder.Services.AddSingleton<PlayerSyncQueue>();
+builder.Services.AddSingleton<ILoggerService, LoggerService>();
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>

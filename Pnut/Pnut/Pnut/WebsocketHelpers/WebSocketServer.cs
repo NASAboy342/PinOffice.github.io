@@ -89,18 +89,25 @@ namespace Pnut.WebsocketHelpers
         {
             while (WebSocket.State == WebSocketState.Open && ConnectionTimeSpend <= TimeSpan.FromMinutes(30))
             {
-                MessageHandler<TRequest, TResponse>(textMessageHandler);
-                Console.WriteLine(JsonConvert.SerializeObject(Buffer));
-                await Task.Delay(TimeSpan.FromMilliseconds(1));
-                ConnectionTimeSpend = DateTime.UtcNow - ConnectionStartTimeUTC;
-                var responseFromHandler = await updateHandler();
-                var responseMessage = JsonConvert.SerializeObject(responseFromHandler);
-                var responseBytes = Encoding.UTF8.GetBytes(responseMessage);
-                await WebSocket.SendAsync(
-                        new ArraySegment<byte>(responseBytes, 0, responseBytes.Length),
-                        WebSocketMessageType.Text,
-                        true,
-                        CancellationToken.None);
+                try
+                {
+                    await MessageHandler<TRequest, TResponse>(textMessageHandler);
+                    await Task.Delay(TimeSpan.FromMilliseconds(1));
+                    ConnectionTimeSpend = DateTime.UtcNow - ConnectionStartTimeUTC;
+                    var responseFromHandler = await updateHandler();
+                    var responseMessage = JsonConvert.SerializeObject(responseFromHandler);
+                    var responseBytes = Encoding.UTF8.GetBytes(responseMessage);
+                    await WebSocket.SendAsync(
+                            new ArraySegment<byte>(responseBytes, 0, responseBytes.Length),
+                            WebSocketMessageType.Text,
+                            true,
+                            CancellationToken.None);
+                }
+                catch
+                {
+
+                }
+                
             }
         }
 
@@ -111,9 +118,8 @@ namespace Pnut.WebsocketHelpers
             {
                 try
                 {
-                    Console.WriteLine(JsonConvert.SerializeObject(Buffer));
                     var receivedMessage = Encoding.UTF8.GetString(Buffer, 0, result.Count);
-                    Console.WriteLine($"#< {receivedMessage} | {JsonConvert.SerializeObject(Buffer)}>#");
+                    Console.WriteLine($"| {receivedMessage} |");
                     var deserializedMessage = JsonConvert.DeserializeObject<TRequest>(receivedMessage);
                     var resultFromHandler = await textMessageHandler(deserializedMessage);
                     var responseMessage = JsonConvert.SerializeObject(resultFromHandler);
@@ -124,7 +130,7 @@ namespace Pnut.WebsocketHelpers
                         true,
                         CancellationToken.None);
                 }
-                catch (Exception ex)
+                catch
                 {
                 }
 

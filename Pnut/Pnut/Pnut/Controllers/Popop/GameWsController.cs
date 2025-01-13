@@ -38,5 +38,10 @@ namespace Pnut.Controllers.Popop
             await _popopService.AddPlayer(player);
             return new BaseResponse();
         }
+        [HttpGet("reset-game")]
+        public async Task<BaseResponse> ResetGame()
+        {
+            return await _popopService.ResetGame();
+        }
     }
 }

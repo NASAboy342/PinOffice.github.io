@@ -45,5 +45,6 @@ namespace Pnut.Models.Popop
         public PopopWorld World { get; set; }
         public List<PopopBall> Balls { get; set; } = [];
         public List<Player> Players { get; set; } = [];
+        public List<Bullet> Bullets { get; set; } = [];
     }
 }

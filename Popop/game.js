@@ -12,7 +12,8 @@ let key = {
     isSDown: false,
     isDDown: false,
     isQDown: false,
-    isEDown: false
+    isEDown: false,
+    isSpaceDown: false,
 }
 function generateRandomString(length) {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -26,6 +27,7 @@ function generateRandomString(length) {
     
     return result;
 }
+let serverConnected = false;
 const socket = new WebSocket('wss://localhost:7090/synce-game');
 let player = {
     name: generateRandomString(10),
@@ -39,6 +41,11 @@ let player = {
     },
     radius: 20,
     facingDirection: 0,
+    spawnTime: Date.now(), 
+    ageInSec: 0,
+    shootIntervalInSec: 1, 
+    lastShootTimeInSec: 0,
+    isShooting: false,
     getRelativeX(objectX){
         return (objectX - this.position.x + this.view.weight/2);
     },
@@ -50,29 +57,36 @@ let player = {
             Name: this.name,
             View: this.view,
             Position: this.position,
+            FacingDirection: this.facingDirection,
+            IsShooting: this.isShooting
         };
         socket.send(JSON.stringify(req));
     },
     Move(){
         if(key.isWDown){
             player.position.y -= 1;
-            this.synce()
         }
         if(key.isADown){
             player.position.x -= 1;
-            this.synce()
         }
         if(key.isSDown){
             player.position.y += 1;
-            this.synce()
         }
         if(key.isDDown){
             player.position.x += 1;
+        }
+        if(serverConnected){
             this.synce()
         }
+    },
+    shoot(){
+            this.isShooting = key.isSpaceDown;
+    },
+    aging(){
+        this.ageInSec = (Date.now() - this.spawnTime) / 1000;
     }
 }
-let serverConnected = false;
+
 let serverMessage = {};
 
 const playerImg = new Image();
@@ -91,8 +105,6 @@ function getHypotenuse(object1x, object1y, object2x, object2y){
 
     let hypotenuse = Math.sqrt(bottomPow2 + heightPow2) * ((bottom < 0 ? -1 : 1) * (height < 0 ? -1 : 1));
 
-    monitor1.textContent = JSON.stringify(`${bottomPow2} , ${heightPow2}, ${bottom}, ${height}, ${hypotenuse}`);
-
     return hypotenuse
 }
 
@@ -107,7 +119,6 @@ function getAngle2(object1x, object1y, object2x, object2y) {
     const thetaRadians = Math.atan2(deltaY, deltaX);
 
     const thetaDegrees = checkAngle(((thetaRadians * (180 / Math.PI) + 360) % 360) + 180);
-    monitor2.textContent = thetaDegrees;
     return thetaDegrees;
 }
 async function postApi(url, data, headers = {}) {
@@ -190,17 +201,51 @@ function drawBalls() {
 }
 
 function drawPlayer(){
+    if(!serverMessage){
+        
+    }
+    if(!serverMessage.Players){
+        return;
+    }
+    let playerInfoFromServer = serverMessage.Players.find(p => p.Name === player.name)
+    let playerRadius = 100;
     ctx.beginPath();
-    ctx.translate(player.getRelativeX(player.position.x), player.getRelativeY(player.position.y));
-    ctx.rotate((player.facingDirection * Math.PI) / 180);
-    ctx.drawImage(playerImg, -50, -50, 100, 100);
-    
-    // ctx.strokeStyle = 'gray'; 
-    // ctx.lineWidth = 3; 
-    // ctx.strokeRect( -49, -49, playerImg.width, playerImg.height);
+    ctx.translate(player.getRelativeX(playerInfoFromServer.Position.X), player.getRelativeY(playerInfoFromServer.Position.Y));
+    ctx.rotate((playerInfoFromServer.FacingDirection * Math.PI) / 180);
+    ctx.drawImage(playerImg, -playerRadius, -playerRadius, playerRadius*2, playerRadius*2);
     
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
+}
+
+function drawEnemyPlayer(){
+    if(!serverMessage){
+        
+    }
+    if(!serverMessage.Players){
+        return;
+    }
+    let playerInfoFromServer = serverMessage.Players.filter(p => p.Name !== player.name)
+    playerInfoFromServer.forEach(p => {
+        let playerRadius = 100;
+        ctx.beginPath();
+        ctx.translate(player.getRelativeX(p.Position.X), player.getRelativeY(p.Position.Y));
+        ctx.rotate((p.FacingDirection * Math.PI) / 180);
+        ctx.drawImage(playerImg, -playerRadius, -playerRadius, playerRadius*2, playerRadius*2);
+        
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+    });
+    
+
+}
+
+function drawBullets(){
+    serverMessage.Bullets.forEach(bullet => {
+        ctx.beginPath();
+        ctx.arc(player.getRelativeX(bullet.Position.X), player.getRelativeY(bullet.Position.Y), bullet.Radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgb(0, 178, 225)';
+        ctx.fill();
+    });
 }
 
 document.addEventListener("keydown", (e) => {
@@ -215,6 +260,10 @@ document.addEventListener("keydown", (e) => {
     }
     if(e.key === "d"){
         key.isDDown = true;
+    }
+    if(e.key === " "){
+        key.isSpaceDown = true;
+        player.shoot();
     }
 });
 
@@ -231,6 +280,10 @@ document.addEventListener("keyup", (e) => {
     if(e.key === "d"){
         key.isDDown = false;
     }
+    if(e.key === " "){
+        key.isSpaceDown = false;
+        player.shoot();
+    }
 });
 
 document.addEventListener("mousemove", (mouse) => {
@@ -242,10 +295,9 @@ login();
 // Update game objects
 async function update() {
     player.Move();
-    //player.facingDirection += 1;
-    if(serverMessage){
-        
-    }
+    // if(serverMessage){
+    //     monitor1.textContent = JSON.stringify(serverMessage);
+    // }
 }
 
 // Render game objects
@@ -255,6 +307,8 @@ function render() {
     if(serverConnected){
         drawWorld();
         drawBalls();
+        drawBullets();
+        drawEnemyPlayer();
         drawPlayer();
     }
 }
